@@ -30,6 +30,10 @@ import ic.doc.cpp.student.shared.action.RetrieveEventsUsingCategoryId;
 import ic.doc.cpp.student.server.handler.RetrieveEventsUsingCategoryIdActionHandler;
 import ic.doc.cpp.student.shared.action.AddStudentInterestedEvent;
 import ic.doc.cpp.student.server.handler.AddStudentInterestedEventActionHandler;
+import ic.doc.cpp.student.shared.action.RetrieveStudentInterestedEvents;
+import ic.doc.cpp.student.server.handler.RetrieveStudentInterestedEventsActionHandler;
+import ic.doc.cpp.student.shared.action.AddStudentDislikeEvent;
+import ic.doc.cpp.student.server.handler.AddStudentDislikeEventActionHandler;
 
 public class ServerModule extends HandlerModule {
 
@@ -85,6 +89,14 @@ public class ServerModule extends HandlerModule {
 
 		bindHandler(AddStudentInterestedEvent.class,
 				AddStudentInterestedEventActionHandler.class,
+				LoggedInActionValidator.class);
+
+		bindHandler(RetrieveStudentInterestedEvents.class,
+				RetrieveStudentInterestedEventsActionHandler.class,
+				LoggedInActionValidator.class);
+
+		bindHandler(AddStudentDislikeEvent.class,
+				AddStudentDislikeEventActionHandler.class,
 				LoggedInActionValidator.class);
 	}
 }

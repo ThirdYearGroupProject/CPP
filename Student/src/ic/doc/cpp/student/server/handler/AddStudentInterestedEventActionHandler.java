@@ -37,16 +37,15 @@ public class AddStudentInterestedEventActionHandler
 		try {
 			StudentUser student = GetEntityThroughDao.getStudentUser(provider);
 			if (student != null) {
-				List<Event> events = student.getEvents();
-				if (!isDuplicatedInterestedEvent(events, action.getEventId())) {
-					Event event = GetEntityThroughDao.getEvent(action.getEventId());
-					events.add(event);
-					StudentUserDao studentDao = new StudentUserDao();
-					studentDao.updateUser(student);
-					result = new AddStudentInterestedEventResult("Successfully add Event: " + event.getTitle());
-				} else {
-					result = new AddStudentInterestedEventResult("You've already add this event");
-				}
+				List<Event> likeEvents = student.getEvents();
+				List<Event> dislikeEvents = student.getDislikeEvents();
+				
+				deleteFromDislikeEvents(action.getEventId(), dislikeEvents);
+				
+				result = addIntoLikeEvents(action.getEventId(), likeEvents);
+				
+				StudentUserDao studentDao = new StudentUserDao();
+				studentDao.updateUser(student);
 			} else {
 				throw new Exception("No such student!");
 			}
@@ -57,6 +56,27 @@ public class AddStudentInterestedEventActionHandler
 		return result;
 	}
 	
+	private AddStudentInterestedEventResult addIntoLikeEvents(Long eventId, List<Event> likeEvents) {
+		AddStudentInterestedEventResult result = null;
+		if (!isDuplicatedInterestedEvent(likeEvents, eventId)) {
+			Event event = GetEntityThroughDao.getEvent(eventId);
+			likeEvents.add(event);
+			result = new AddStudentInterestedEventResult("Successfully add Event: " + event.getTitle());
+		} else {
+			result = new AddStudentInterestedEventResult("You've already add this event");
+		}
+		return result;
+	}
+
+	private void deleteFromDislikeEvents(Long eventId, List<Event> dislikeEvents) {
+		for (Event event : dislikeEvents) {
+			if (event.getEventId().equals(eventId)) {
+				dislikeEvents.remove(event);
+				break;
+			}
+		}
+	}
+
 	private boolean isDuplicatedInterestedEvent(
 			List<Event> events, Long eventId) {
 		boolean flag = false;

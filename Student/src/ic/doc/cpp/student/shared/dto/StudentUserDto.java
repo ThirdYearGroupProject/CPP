@@ -15,6 +15,7 @@ public class StudentUserDto implements Serializable {
 	protected String lastName;
 	protected String gender;
 	protected List<EventDto> eventDtos;
+	protected List<EventDto> dislikeEventDtos;
 	protected List<CompanyDto> companyDtos;
 	protected List<CompanyCategoryDto> interestedAreaDtos;
 	
@@ -134,6 +135,14 @@ public class StudentUserDto implements Serializable {
 		this.companyDtos = companyDtos;
 	}
 
+
+	public List<EventDto> getDislikeEventDtos() {
+		return dislikeEventDtos;
+	}
+
+	public void setDislikeEventDtos(List<EventDto> dislikeEventDtos) {
+		this.dislikeEventDtos = dislikeEventDtos;
+	}
 
 	@Override
 	public String toString() {

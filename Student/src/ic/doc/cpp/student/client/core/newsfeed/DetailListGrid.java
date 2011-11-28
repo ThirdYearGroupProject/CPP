@@ -1,5 +1,7 @@
 package ic.doc.cpp.student.client.core.newsfeed;
 
+import ic.doc.cpp.student.shared.action.AddStudentDislikeEvent;
+import ic.doc.cpp.student.shared.action.AddStudentDislikeEventResult;
 import ic.doc.cpp.student.shared.action.AddStudentInterestedEvent;
 import ic.doc.cpp.student.shared.action.AddStudentInterestedEventResult;
 
@@ -45,7 +47,6 @@ public class DetailListGrid extends ListGrid {
 	
 	@Override
     protected Canvas getExpansionComponent(final ListGridRecord record) {
-        final ListGrid grid = this;
         VLayout layout = new VLayout(5);
         layout.setPadding(5);
 
@@ -81,13 +82,13 @@ public class DetailListGrid extends ListGrid {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						SC.say("error","Adding interested company fail...");
+						SC.say("error","Adding interested event fail...");
 					}
 
 					@Override
 					public void onSuccess(AddStudentInterestedEventResult result) {
 						collapseAll();
-						record.setAttribute("liked", true);
+						record.setAttribute("indicator", "icons/48/like.png");
 						refreshFields();
 						SC.say("Message", result.getMessage());
 					}
@@ -95,10 +96,26 @@ public class DetailListGrid extends ListGrid {
             }
         });
 
-        IButton doneButton = new IButton("Done");
+        IButton doneButton = new IButton("DisLike");
         doneButton.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
-            	grid.collapseRecord(record);
+            	dispatcher.execute(
+            			new AddStudentDislikeEvent(record.getAttributeAsLong("eventId")),
+            			new AsyncCallback<AddStudentDislikeEventResult>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						SC.say("error", "Adding unlike event fail...");
+					}
+
+					@Override
+					public void onSuccess(AddStudentDislikeEventResult result) {
+						collapseAll();
+						record.setAttribute("indicator", "icons/48/dislike.png");
+						refreshFields();
+						SC.say("Message", result.getMessage());
+					}
+				});
             }
         });
         

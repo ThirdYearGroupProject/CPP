@@ -42,6 +42,7 @@ public class SignInPagePresenter extends
 		Button getSignInButton();
 
 		void resetAndFocus();
+		
 	}
 
 	@ProxyStandard

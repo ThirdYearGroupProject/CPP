@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.smartgwt.client.data.Record;
+import com.smartgwt.client.widgets.calendar.CalendarEvent;
 
 import ic.doc.cpp.student.client.core.data.CompanyTileRecord;
 import ic.doc.cpp.student.shared.dto.CompanyDto;
@@ -55,5 +56,28 @@ public class CreateRecordFromDto {
 		record.setAttribute("endDate", eventDto.getEnd_date());
 		
 		return record;
+	}
+
+	public static List<CalendarEvent> createCalendarEventFromDtos(List<EventDto> eventDtos) {
+		List<CalendarEvent> result = new ArrayList<CalendarEvent>();
+		for (EventDto eventDto : eventDtos) {
+			result.add(createCalendarEventFromDto(eventDto));
+		}
+		return result;
+	}
+
+	private static CalendarEvent createCalendarEventFromDto(EventDto eventDto) {
+		int eventId = safeLongToInt(eventDto.getEventId());
+		CalendarEvent calendarEvent = new CalendarEvent(eventId, eventDto.getTitle(),
+				eventDto.getDescription(), eventDto.getStart_date(), eventDto.getEnd_date());
+		return calendarEvent;
 	}  
+	
+	public static int safeLongToInt(long l) {
+	    if (l < Integer.MIN_VALUE || l > Integer.MAX_VALUE) {
+	        throw new IllegalArgumentException
+	            (l + " cannot be cast to int without changing its value.");
+	    }
+	    return (int) l;
+	}
 }

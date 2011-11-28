@@ -19,15 +19,14 @@ public class NavigationPane extends VLayout {
 		 GWT.log("init NavigationPane()...", null);
 		
 		 // initialise the Navigation Pane layout container
-		 setStyleName("crm-NavigationPane");	
+		 setStyleName("navigationPane");
 		 setWidth(WEST_WIDTH);
-		 // this.setShowResizeBar(true); 
+		 setShowResizeBar(true); 
 		
 		 // initialise the Section Stack
 		 navigationSectionStack = new SectionStack();
-		 navigationSectionStack.setWidth(WEST_WIDTH);
+		 navigationSectionStack.setWidth100();
 		 navigationSectionStack.setVisibilityMode(VisibilityMode.MUTEX);
-		 navigationSectionStack.setShowResizeBar(true);
 		 navigationSectionStack.setShowExpandControls(true);
 		 navigationSectionStack.setAnimateSections(true);	
 	    

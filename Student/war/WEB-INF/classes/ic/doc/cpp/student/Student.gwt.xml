@@ -18,8 +18,8 @@
 	<inherits name='com.gwtplatform.dispatch.Dispatch'/>
 	<inherits name="com.smartgwt.SmartGwt"/>
 	<inherits name="com.smartgwt.SmartGwtNoTheme"/>  	
-	<inherits name="com.smartclient.theme.enterpriseblue.EnterpriseBlue"/>
-	<inherits name="com.smartclient.theme.enterpriseblue.EnterpriseBlueResources"/> 
+<!-- 	<inherits name="com.smartclient.theme.enterpriseblue.EnterpriseBlue"/> -->
+<!-- 	<inherits name="com.smartclient.theme.enterpriseblue.EnterpriseBlueResources"/>  -->
 
 <!-- 	<inherits name="org.gwtmultipage.gwtmultipage" /> -->
 	<!-- Specify the app entry point class.                         -->

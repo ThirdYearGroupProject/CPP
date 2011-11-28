@@ -13,8 +13,7 @@ import com.smartgwt.client.widgets.tree.TreeGrid;
 
 public class StudentPageView extends ViewImpl implements
 		StudentPagePresenter.MyView {
-	private static final int NORTH_HEIGHT = 85; // MASTHEAD_HEIGHT + APPLICATION_MENU_HEIGHT
-	private static final int DEFAULT_MENU_WIDTH = 70;
+	private static final int NORTH_HEIGHT = 58; // MASTHEAD_HEIGHT + APPLICATION_MENU_HEIGHT
 	private static final String DEFAULT_MARGIN = "0px";  
 	
 	private VLayout mainLayout;	
@@ -23,7 +22,7 @@ public class StudentPageView extends ViewImpl implements
 	private VLayout westLayout;
 	private VLayout eastLayout;
 
-	private final ApplicationMenu applicationMenu ;
+//	private final ApplicationMenu applicationMenu ;
 	private final Masthead masthead;
 	private final NavigationPane navigationPane;
 	
@@ -35,7 +34,7 @@ public class StudentPageView extends ViewImpl implements
 	public StudentPageView() {
 		super();
 		
-		applicationMenu = new ApplicationMenu();
+//		applicationMenu = new ApplicationMenu();
 		masthead = new Masthead();
 		navigationPane = new NavigationPane();
 		
@@ -55,12 +54,12 @@ public class StudentPageView extends ViewImpl implements
 		northLayout.setHeight(NORTH_HEIGHT);
 		
 		// initialise application menu
-		initApplicationMenu();
+//		initApplicationMenu();
 		
 		// initialise the nested layout conatainer
 		VLayout vLayout = new VLayout();
 		vLayout.addMember(this.masthead);
-		vLayout.addMember(this.applicationMenu);
+//		vLayout.addMember(this.applicationMenu);
 		northLayout.addMember(vLayout);
 		
 		// initialise navigation pane
@@ -71,6 +70,7 @@ public class StudentPageView extends ViewImpl implements
 		
 		// initialise east layout container
 		eastLayout = new VLayout();
+		eastLayout.setStyleName("contextArea");
 		
 		// initialise the South layout container
 		southLayout = new HLayout();
@@ -100,12 +100,12 @@ public class StudentPageView extends ViewImpl implements
 		
 	}
 	
-	private void initApplicationMenu() {
-	    applicationMenu.addMenu("<u>U</u>ser", DEFAULT_MENU_WIDTH,
-	    		"Profile, Log out");
-	    applicationMenu.addMenu("<u>H</u>elp", DEFAULT_MENU_WIDTH, 
-	    		"How to Use, Report Bug, About");
-	}
+//	private void initApplicationMenu() {
+//	    applicationMenu.addMenu("<u>U</u>ser", DEFAULT_MENU_WIDTH,
+//	    		"Profile, Log out");
+//	    applicationMenu.addMenu("<u>H</u>elp", DEFAULT_MENU_WIDTH, 
+//	    		"How to Use, Report Bug, About");
+//	}
 	
 	@Override
 	public Widget asWidget() {
@@ -138,5 +138,9 @@ public class StudentPageView extends ViewImpl implements
 	public EventCategoryTreeGrid getEventCategoryTreeGrid() {
 		return eventCategoryTreeGrid;
 	}
-
+	
+	@Override
+	public void setSignedInUser(String name) {
+		masthead.setSignedInUser(name);
+	}
 }

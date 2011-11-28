@@ -117,7 +117,9 @@ public class Feed {
 		panelLabel.setAttribute("startDate", DateTimeFormat.getFormat(PredefinedFormat.DATE_TIME_MEDIUM).format(eventDto.getStart_date()));
 		panelLabel.setAttribute("endDate", DateTimeFormat.getFormat(PredefinedFormat.DATE_TIME_MEDIUM).format(eventDto.getEnd_date()));
 		panelLabel.setAttribute("website", eventDto.getWebsite());
-		panelLabel.setAttribute("liked", eventDto.isLikedByCurrentUser());
+		if (eventDto.isLikedByCurrentUser()) {
+			panelLabel.setAttribute("indicator", "icons/48/like.png");
+		}
 		return panelLabel;
 	}
 	

@@ -21,7 +21,7 @@ public class ListgridSectionStackSection extends SectionStackSection {
 	  	
 		 // initialise the List Grid  
 		 listGrid = new ListGrid();  
-	  	 listGrid.setBaseStyle("crm-NavigationPaneGridCell");  
+	  	 listGrid.setBaseStyle("navigationPaneGridCell");  
 	  	 listGrid.setWidth100();  
 	  	 listGrid.setHeight100();  
 	  	 listGrid.setShowAllRecords(true);  

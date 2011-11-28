@@ -16,11 +16,15 @@ import java.util.List;
 
 public class CreateDto {
 	public static StudentUserDto createStudentDto(StudentUser studentUser) {
-		return new StudentUserDto(studentUser.getLogin(), studentUser.getSalt(),
+		StudentUserDto result = new StudentUserDto(studentUser.getLogin(), studentUser.getSalt(),
 				studentUser.getPassword(), studentUser.getEmail(), 
 				studentUser.getFirstName(), studentUser.getLastName(), 
 				studentUser.getGender(), createEventDtos(studentUser.getEvents()),  
 				createCompanyDtos(studentUser.getCompanys()), createCompanyCategoryDtos(studentUser.getInterestedArea()));
+		
+		result.setDislikeEventDtos(createEventDtos(studentUser.getDislikeEvents()));
+
+		return result;
 	}
 
 	public static List<CompanyDto> createCompanyDtos(List<Company> companys) {

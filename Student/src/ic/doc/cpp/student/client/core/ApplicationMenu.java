@@ -23,7 +23,6 @@ public class ApplicationMenu extends HLayout {
 		GWT.log("init ApplicationMenu()...", null);
 			
 	    // initialise the Application Menu layout container
-		setStyleName("crm-ApplicationMenu");	
 	    setHeight(APPLICATION_MENU_HEIGHT);
 	    
 	    // initialise the Menu Bar

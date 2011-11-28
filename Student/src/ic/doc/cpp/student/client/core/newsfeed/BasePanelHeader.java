@@ -13,7 +13,7 @@ public class BasePanelHeader extends HLayout {
 	private final Label editLabel;
 	
 	public BasePanelHeader(boolean hasParent) {
-		setHeight(40);
+		setHeight(43);
 	    setAlign(VerticalAlignment.CENTER);
 		
 		titleLabel = new Label();
@@ -22,7 +22,8 @@ public class BasePanelHeader extends HLayout {
 		
 		if (hasParent) {
 			backLabel.setContents("Back");
-			backLabel.setWidth("10%");
+			backLabel.setWidth(43);
+			backLabel.setHeight(30);
 			backLabel.setAlign(Alignment.CENTER);
 			backLabel.setStyleName("backButton");
 		} else {
@@ -34,7 +35,7 @@ public class BasePanelHeader extends HLayout {
 	    titleLabel.setAlign(Alignment.CENTER);
 	    titleLabel.setStyleName("title");
 	    
-	    editLabel.setWidth("10%");
+	    editLabel.setWidth(43);
 	    
 	    addMember(backLabel);
 	    addMember(titleLabel);
@@ -48,10 +49,11 @@ public class BasePanelHeader extends HLayout {
 	}
 	
 	public HandlerRegistration setEditLabel(String label, String title, ClickHandler handler) {
-		editLabel.setContents(label);
-		editLabel.setTitle(title);
-		editLabel.setAlign(Alignment.CENTER);
-		editLabel.setStyleName("goButton");
+//		editLabel.setContents(label);
+//		editLabel.setTitle(title);
+//		editLabel.setAlign(Alignment.CENTER);
+//		editLabel.setHeight(30);
+//		editLabel.setStyleName("goButton");
 		return editLabel.addClickHandler(handler);
 	}
 

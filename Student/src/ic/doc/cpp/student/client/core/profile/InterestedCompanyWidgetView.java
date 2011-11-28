@@ -74,10 +74,10 @@ public class InterestedCompanyWidgetView extends ViewImpl implements
 	    DetailViewerField cidField = new DetailViewerField("companyId");
 	    
 	    interestedCompanyTileGrid.setFields(pictureField, nameField, cidField);
-	    interestedCompanyTileGrid.setStyleName("crm-Wizard-Body");
+	    interestedCompanyTileGrid.setStyleName("wizard-Body");
 	    
 	    VLayout header = StudentUserProfileView.initHeader("Company Information", "View companies' information you are interested in");
-	    header.setStyleName("crm-Wizard-Header");
+	    header.setStyleName("wizard-Header");
 	    
 	    widget.setMembers(header, interestedCompanyTileGrid);
 		

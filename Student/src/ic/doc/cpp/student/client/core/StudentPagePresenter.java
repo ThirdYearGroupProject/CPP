@@ -38,6 +38,8 @@ public class StudentPagePresenter extends
 		public NavigationPane getNavigationPane();
 
 		EventCategoryTreeGrid getEventCategoryTreeGrid();
+
+		void setSignedInUser(String name);
 	}
 	
 	

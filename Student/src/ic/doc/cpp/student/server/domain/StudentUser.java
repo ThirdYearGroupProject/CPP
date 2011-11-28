@@ -55,6 +55,13 @@ public class StudentUser {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
+	@JoinTable(name = "student_user_dislikeEvents",
+		joinColumns = {@JoinColumn(name = "login")},
+		inverseJoinColumns = {@JoinColumn(name = "event_id")})
+	protected List<Event> dislikeEvents;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "student_user_company_category",
 		joinColumns = {@JoinColumn(name = "login")},
 		inverseJoinColumns = {@JoinColumn(name = "category_id")})
@@ -222,5 +229,13 @@ public class StudentUser {
 
 	public void setInterestedArea(List<CompanyCategory> interestedArea) {
 		this.interestedArea = interestedArea;
+	}
+
+	public List<Event> getDislikeEvents() {
+		return dislikeEvents;
+	}
+
+	public void setDislikeEvents(List<Event> dislikeEvents) {
+		this.dislikeEvents = dislikeEvents;
 	}
 }

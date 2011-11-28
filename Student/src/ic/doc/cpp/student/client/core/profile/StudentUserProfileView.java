@@ -76,7 +76,7 @@ public class StudentUserProfileView extends ViewImpl implements
 
 		VLayout panel = new VLayout();
 		VLayout header = initHeader("Password Setting", "You can change your password here.");
-		header.setStyleName("crm-Wizard-Header");
+		header.setStyleName("wizard-Header");
 		VLayout southLayout = new VLayout();
 		
 		VLayout body = initPasswordSettingTabBody();
@@ -133,7 +133,7 @@ public class StudentUserProfileView extends ViewImpl implements
 		
 		VLayout panel = new VLayout();
 		VLayout header = initHeader("Basic Information", "You can update your information here.");
-		header.setStyleName("crm-Wizard-Header");
+		header.setStyleName("wizard-Header");
 		VLayout southLayout = new VLayout();
 		VLayout body = initBasicInformationTabBody();
 		basicInformationUpdateButton = new IButton("Update");
@@ -207,13 +207,13 @@ public class StudentUserProfileView extends ViewImpl implements
 
 	    // initialise the Name label
 	    Label name = new Label();
-	    name.setStyleName("crm-Wizard-Name");
+	    name.setStyleName("wizard-Name");
 	    name.setContents(title);
 	    name.setWidth100();
 
 	    // initialise the Description label
 	    Label descriptionLabel = new Label();
-	    descriptionLabel.setStyleName("crm-Wizard-Description");
+	    descriptionLabel.setStyleName("wizard-Description");
 	    descriptionLabel.setContents(description);
 	    descriptionLabel.setWidth100();
 
@@ -231,7 +231,7 @@ public class StudentUserProfileView extends ViewImpl implements
 		int footerHeight = 48;
 		    // initialise the Footer layout container
 		VLayout footer = new VLayout();
-		footer.setStyleName("crm-Wizard-Footer");
+		footer.setStyleName("wizard-Footer");
 		footer.setWidth100();
 		footer.setHeight(footerHeight);
 		

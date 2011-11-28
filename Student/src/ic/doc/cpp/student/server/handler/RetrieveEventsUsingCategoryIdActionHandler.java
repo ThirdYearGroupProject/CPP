@@ -1,5 +1,6 @@
 package ic.doc.cpp.student.server.handler;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -51,9 +52,10 @@ public class RetrieveEventsUsingCategoryIdActionHandler
 			String categoryName = eventCategory.getCategoryName();
 			Date updateTime = action.getUpdateTime();
 			EventDao eventDao = new EventDao();
-			List<Event> events = eventDao.retrieveEvents(categoryName, updateTime);
-			List<EventDto> eventDtos = CreateDto.createEventDtos(events);
-			checkIfLikedByCurrentUser(currentUser,eventDtos);
+			List<Event> cleanEvents = removeDislikeEvents(currentUser, 
+					eventDao.retrieveEvents(categoryName, updateTime));
+			List<EventDto> eventDtos = CreateDto.createEventDtos(cleanEvents);
+			checkIfLikedByCurrentUser(currentUser, eventDtos);
 			result = new RetrieveEventsUsingCategoryIdResult(categoryId, eventDtos);
 		} catch(Exception e) {
 			throw new ActionException(e);
@@ -62,13 +64,33 @@ public class RetrieveEventsUsingCategoryIdActionHandler
 		return result;
 	}
 
+	private List<Event> removeDislikeEvents(StudentUser currentUser,
+			List<Event> events) {
+		List<Event> result = new ArrayList<Event>();
+		
+		List<Event> dislikeEvent = currentUser.getDislikeEvents();
+		Map<Long, Event> map = new HashMap<Long, Event>();
+		
+		for (Event e : dislikeEvent) {
+			map.put(e.getEventId(), e);
+		}
+		
+		for (Event e : events) {
+			if (map.get(e.getEventId()) == null) {
+				result.add(e);
+			}
+		}
+		
+		return result;
+	}
+
 	private void checkIfLikedByCurrentUser(StudentUser currentUser,
 			List<EventDto> eventDtos) {
-		List<Event> interestedEvents = currentUser.getEvents();
+		List<Event> likeEvents = currentUser.getEvents();
 		
 		Map<Long, Event> eventMap = new HashMap<Long, Event>();
 		
-		for (Event e : interestedEvents) {
+		for (Event e : likeEvents) {
 			eventMap.put(e.getEventId(), e);
 		}
 		

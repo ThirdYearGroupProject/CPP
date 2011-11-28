@@ -5,10 +5,8 @@ import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.types.ListGridFieldType;
 import com.smartgwt.client.types.SelectionStyle;
 import com.smartgwt.client.widgets.events.ClickHandler;
-import com.smartgwt.client.widgets.grid.CellFormatter;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
-import com.smartgwt.client.widgets.grid.ListGridRecord;
 import com.smartgwt.client.widgets.layout.VLayout;
 
 
@@ -26,32 +24,36 @@ public class BasePanel extends VLayout {
 	  	contents.setShowAllRecords(true);  
 	  	contents.setShowHeader(false);
 	  	contents.setSelectionType(SelectionStyle.SINGLE);
-	  	contents.setBaseStyle("fullFontsListGridCell");
+	  	contents.setBaseStyle("eventFeedListGridCell");
 	  	
 	  	ListGridField iconField = new ListGridField("icon", "Icon", 80);  
+	  	iconField.setType(ListGridFieldType.IMAGE);  
 	  	iconField.setImageSize(80); 
 	  	iconField.setAlign(Alignment.RIGHT);
-	  	iconField.setType(ListGridFieldType.IMAGE);  
 	  	iconField.setCanEdit(false);  
 	  	
 		ListGridField titleField = new ListGridField("title", "Title"); 
-		titleField.setCellFormatter(new CellFormatter() {
-			
-			@Override
-			public String format(Object value, ListGridRecord record, int rowNum,
-					int colNum) {
-				StringBuilder sb = new StringBuilder();
-				sb.append("<span class=\"listViewTitle\" \">");
-				sb.append(record.getAttributeAsString("title"));
-				sb.append("</span>");
-				if (record.getAttributeAsBoolean("liked")) {
-					sb.append("<br><span class=\"listViewTitle\" \">Liked</span>");
-				}
-				return sb.toString();
-			}
-		});
+//		titleField.setCellFormatter(new CellFormatter() {
+//			
+//			@Override
+//			public String format(Object value, ListGridRecord record, int rowNum,
+//					int colNum) {
+//				StringBuilder sb = new StringBuilder();
+//				sb.append(record.getAttributeAsString("title"));
+//				if (record.getAttributeAsBoolean("liked")) {
+//					sb.append("<br>Liked");
+//				}
+//				return sb.toString();
+//			}
+//		});
 		
-		contents.setFields(new ListGridField[] {iconField, titleField});  
+		ListGridField indicatorField = new ListGridField("indicator", "Indicator", 32);
+		indicatorField.setType(ListGridFieldType.IMAGE);
+		indicatorField.setImageSize(33);
+		indicatorField.setAlign(Alignment.LEFT);
+		indicatorField.setCanEdit(false);
+		
+		contents.setFields(new ListGridField[] {iconField, indicatorField, titleField});  
 		
 		header = new BasePanelHeader(hasParent);
 		
