@@ -1,12 +1,11 @@
 package ic.doc.cpp.student.server.handler;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
 
-import ic.doc.cpp.student.server.dao.StudentUserDao;
 import ic.doc.cpp.student.server.domain.StudentUser;
+import ic.doc.cpp.student.server.util.GetEntityThroughDao;
 import ic.doc.cpp.student.shared.action.RetrieveStudentInterestedCompanies;
 import ic.doc.cpp.student.shared.action.RetrieveStudentInterestedCompaniesResult;
 import ic.doc.cpp.student.shared.dto.util.CreateDto;
@@ -20,12 +19,12 @@ public class RetrieveStudentInterestedCompaniesActionHandler
 		implements
 		ActionHandler<RetrieveStudentInterestedCompanies, RetrieveStudentInterestedCompaniesResult> {
 
-	private final Provider<HttpServletRequest> request;
+	private final Provider<HttpServletRequest> provider;
 	
 	@Inject
 	public RetrieveStudentInterestedCompaniesActionHandler(
-			final Provider<HttpServletRequest> request) {
-		this.request = request;
+			final Provider<HttpServletRequest> provider) {
+		this.provider = provider;
 	}
 
 	@Override
@@ -35,10 +34,8 @@ public class RetrieveStudentInterestedCompaniesActionHandler
 		RetrieveStudentInterestedCompaniesResult result = null;
 		
 		try {
-			HttpSession session = request.get().getSession();
-			String login = session.getAttribute("login.authenticated").toString();
-			StudentUserDao studentDao = new StudentUserDao();
-			StudentUser student = studentDao.retrieveUser(login);
+			StudentUser student = GetEntityThroughDao.getStudentUser(provider);
+			
 			result = new RetrieveStudentInterestedCompaniesResult(
 					CreateDto.createCompanyDtos(student.getCompanys()));
 		} catch (Exception e) {

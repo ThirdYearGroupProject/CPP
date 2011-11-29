@@ -21,7 +21,6 @@ public class CalendarView extends ViewImpl implements CalendarPresenter.MyView {
 	public CalendarView() {
 		// initialise the Calendar View layout container
 		widget = new VLayout();
-		widget.setStyleName("crm-ContextArea");
 		widget.setWidth100(); 	
 		
 		DataSource eventDS = new DataSource();  
@@ -41,7 +40,6 @@ public class CalendarView extends ViewImpl implements CalendarPresenter.MyView {
 		calendar.setShowWeekends(false);  
 		calendar.setShowWorkday(true);  
 		calendar.setScrollToWorkday(true);  
-		calendar.setAutoFetchData(true);  
 		calendar.setCanEditEvents(false);
 		calendar.setDataSource(eventDS);
 		

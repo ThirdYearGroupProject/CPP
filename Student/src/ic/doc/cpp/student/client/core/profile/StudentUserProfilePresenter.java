@@ -38,9 +38,11 @@ public class StudentUserProfilePresenter
 
 	private final DispatchAsync dispatcher;
 	private final InterestedCompanyWidgetPresenter interestedCompanyWidgetPresenter;
+	private final InterestedAreaWidgetPresenter interestedAreaWidgetPresenter;
 	private final FileUploadPopupWidgetPresenter fileUploadPresenter;
 	
 	public static final Object TYPE_RevealInterestedCompany = new Object();
+	public static final Object TYPE_RevealInterestedArea = new Object();
 	public static final Object TYPE_RevealCVUploader = new Object(); 
 	
 	public interface MyView extends View {
@@ -57,7 +59,7 @@ public class StudentUserProfilePresenter
 
 		String getNewPassword();
 
-		HandlerRegistration addTabSelectedHandler(TabSelectedHandler handler);
+		HandlerRegistration addInterestedCompanyTabSelectedHandler(TabSelectedHandler handler);
 
 		HandlerRegistration addBasicInformationUpdateButtonClickHandler(
 				com.smartgwt.client.widgets.events.ClickHandler handler);
@@ -67,6 +69,9 @@ public class StudentUserProfilePresenter
 
 		HandlerRegistration addUploadCVLinkItemClickHandler(
 				com.smartgwt.client.widgets.form.fields.events.ClickHandler handler);
+
+		HandlerRegistration addInterestedAreaTabSelectedHandler(
+				TabSelectedHandler handler);
 
 	}
 
@@ -80,10 +85,12 @@ public class StudentUserProfilePresenter
 	public StudentUserProfilePresenter(final EventBus eventBus, final MyView view,
 			final MyProxy proxy, final DispatchAsync dispatcher, 
 			final InterestedCompanyWidgetPresenter interestedCompanyWidgetPresenter,
+			final InterestedAreaWidgetPresenter interestedAreaWidgetPresenter,
 			final FileUploadPopupWidgetPresenter fileUploadPresenter) {
 		super(eventBus, view, proxy);
 		this.dispatcher = dispatcher;
 		this.interestedCompanyWidgetPresenter = interestedCompanyWidgetPresenter;
+		this.interestedAreaWidgetPresenter = interestedAreaWidgetPresenter;
 		this.fileUploadPresenter = fileUploadPresenter;
 	}
 
@@ -150,11 +157,19 @@ public class StudentUserProfilePresenter
 			
 		}));
 		
-		registerHandler(getView().addTabSelectedHandler(new TabSelectedHandler() {
+		registerHandler(getView().addInterestedCompanyTabSelectedHandler(new TabSelectedHandler() {
 			
 			@Override
 			public void onTabSelected(TabSelectedEvent event) {
 				setInSlot(TYPE_RevealInterestedCompany, interestedCompanyWidgetPresenter);
+			}
+		}));
+		
+		registerHandler(getView().addInterestedAreaTabSelectedHandler(new TabSelectedHandler() {
+			
+			@Override
+			public void onTabSelected(TabSelectedEvent event) {
+				setInSlot(TYPE_RevealInterestedArea, interestedAreaWidgetPresenter);
 			}
 		}));
 		

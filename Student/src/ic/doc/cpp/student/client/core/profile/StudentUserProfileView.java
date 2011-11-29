@@ -31,6 +31,7 @@ public class StudentUserProfileView extends ViewImpl implements
 	private final TabSet mainTabSet; 
 
 	private VLayout interestedCompanySlot;
+	private VLayout interestedAreaSlot;
 	
 	private DynamicForm basicInformationForm;
 	private DynamicForm passwordSettingForm;
@@ -41,6 +42,7 @@ public class StudentUserProfileView extends ViewImpl implements
 	private LinkItem cvUploadLinkItem;
 	
 	private Tab interestedCompanyTab;
+	private Tab interestedAreaTab;
 	
 	@Inject
 	public StudentUserProfileView() {
@@ -53,6 +55,12 @@ public class StudentUserProfileView extends ViewImpl implements
 		// Basic information tab
 		Tab basciInformationTab = initBasicInformationTab();
 		
+		// Interested area tab
+		interestedAreaTab = new Tab();
+		interestedAreaTab.setTitle("Interested Area");
+		interestedAreaSlot = new VLayout();
+		interestedAreaTab.setPane(interestedAreaSlot);
+		
 		// interested company tab
 		interestedCompanyTab = new Tab();
 		interestedCompanyTab.setTitle("Interested Companies");
@@ -63,7 +71,7 @@ public class StudentUserProfileView extends ViewImpl implements
 		Tab passwordSettingTab = initPasswordSettingTab();
 		
 		// add tabs into tabset
-		mainTabSet.setTabs(basciInformationTab, interestedCompanyTab, passwordSettingTab);
+		mainTabSet.setTabs(basciInformationTab, interestedAreaTab, interestedCompanyTab, passwordSettingTab);
 		
 		// add tabset into main container
 		widget.setMembers(mainTabSet);
@@ -121,7 +129,7 @@ public class StudentUserProfileView extends ViewImpl implements
 		newPasswordItem2.setValidators(matchesValidator);
 		passwordSettingForm.setFields(originalPassword, newPasswordItem, newPasswordItem2);
 		
-		body.setStyleName("crm-Wizard-Body");
+		body.setStyleName("wizard-Body");
 		body.addMember(passwordSettingForm);
 		
 		return body;
@@ -183,7 +191,7 @@ public class StudentUserProfileView extends ViewImpl implements
 		basicInformationForm.setFields(firstNameItem, lastNameItem, genderItem, emailItem, cvUploadLinkItem);
 		
 		VLayout body = new VLayout();
-		body.setStyleName("crm-Wizard-Body");
+		body.setStyleName("wizard-Body");
 		body.addMember(basicInformationForm);
 		
 		return body;
@@ -227,7 +235,7 @@ public class StudentUserProfileView extends ViewImpl implements
 	    return header;
 	}
 
-	private VLayout initFooter(IButton updateButton) {
+	public static VLayout initFooter(IButton updateButton) {
 		int footerHeight = 48;
 		    // initialise the Footer layout container
 		VLayout footer = new VLayout();
@@ -324,10 +332,14 @@ public class StudentUserProfileView extends ViewImpl implements
 	}
 	
 	@Override
-	public HandlerRegistration addTabSelectedHandler(TabSelectedHandler handler) {
+	public HandlerRegistration addInterestedCompanyTabSelectedHandler(TabSelectedHandler handler) {
 		return interestedCompanyTab.addTabSelectedHandler(handler);
 	}
 
+	@Override
+	public HandlerRegistration addInterestedAreaTabSelectedHandler(TabSelectedHandler handler) {
+		return interestedAreaTab.addTabSelectedHandler(handler);
+	}
 	
 	@Override
 	public void setInSlot(Object slot, Widget content) {
@@ -335,6 +347,11 @@ public class StudentUserProfileView extends ViewImpl implements
 			if (content != null && content instanceof VLayout) {
 				GWT.log("Reveal iterested companys");
 				interestedCompanySlot.setMembers((VLayout)content);
+			}
+		} else if (slot == StudentUserProfilePresenter.TYPE_RevealInterestedArea) {
+			if (content != null && content instanceof VLayout) {
+				GWT.log("Reveal iterested areas");
+				interestedAreaSlot.setMembers((VLayout)content);
 			}
 		}
 	}

@@ -22,13 +22,12 @@ public class BasePanelHeader extends HLayout {
 		
 		if (hasParent) {
 			backLabel.setContents("Back");
-			backLabel.setWidth(43);
 			backLabel.setHeight(30);
 			backLabel.setAlign(Alignment.CENTER);
 			backLabel.setStyleName("backButton");
-		} else {
-			backLabel.setWidth("10%");
 		}
+		
+		backLabel.setWidth(43);
 		
 		  
 	    titleLabel.setWidth100();

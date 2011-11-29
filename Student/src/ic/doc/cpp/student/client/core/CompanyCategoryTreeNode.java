@@ -9,4 +9,9 @@ public class CompanyCategoryTreeNode extends TreeNode {
 		setAttribute("categoryActuralName", acturalNameValue);
 		setAttribute("parentId", parentId);
 	}
+	
+	public CompanyCategoryTreeNode (Long categoryId, String displayNameValue, String acturalNameValue, Long parentId, boolean isOpen) {
+		this(categoryId, displayNameValue, acturalNameValue, parentId);
+		setAttribute("isOpen", isOpen);
+	}
 }
