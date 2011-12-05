@@ -30,6 +30,7 @@ public class CompanyPageView extends ViewImpl implements
 		
 		navigationPane = new NavigationPane("navigationPane");
 		navigationPane.addListgridSection("Main", MainNavigationPaneSectionData.getNewRecords());
+		
 		bodyLeft = navigationPane;
 
 		bodyRight = new VLayout();

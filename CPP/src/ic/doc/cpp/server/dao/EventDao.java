@@ -4,6 +4,8 @@ import ic.doc.cpp.server.domain.Event;
 import ic.doc.cpp.server.domain.EventCategory;
 import ic.doc.cpp.server.domain.EventCategory_;
 import ic.doc.cpp.server.domain.Event_;
+import ic.doc.cpp.server.domain.StudentUser;
+import ic.doc.cpp.server.domain.StudentUser_;
 
 import java.util.Date;
 import java.util.List;
@@ -13,6 +15,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -111,6 +114,26 @@ public class EventDao extends BaseDao {
 		}
 		
 		return events;
+	}
+	
+	public List<StudentUser> retieveUsersLikeAnEvent(Long eventId) {
+		EntityManager em = createEntityManager();
+		List<StudentUser> result = null;
+		Event event = retrieveEvent(eventId);
+		try {
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			CriteriaQuery<StudentUser> cq = cb.createQuery(StudentUser.class);
+			Root<StudentUser> s = cq.from(StudentUser.class);
+			Expression<List<Event>> es = s.get(StudentUser_.events);
+			Predicate condition = cb.isMember(event, es);
+			cq.where(condition);
+			TypedQuery<StudentUser> query = em.createQuery(cq);
+			result = query.getResultList();
+		} finally {
+			em.close();
+		}
+		
+		return result;
 	}
 	
 	public Event updateEvent(Event event) {

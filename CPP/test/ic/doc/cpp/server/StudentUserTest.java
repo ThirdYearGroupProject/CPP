@@ -44,9 +44,9 @@ public class StudentUserTest {
 			addLikeEvent();
 			addLikeCompany();
 			addInterestedArea();
-//			deleteLikeEvent();
-//			deleteLikeCompany();
-//			deleteInterestedArea();
+
+			createAnotherStudentUser();
+			addAnotherUserLikeEvent();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,7 +58,6 @@ public class StudentUserTest {
 //		StudentUserDao studentUserDao = new StudentUserDao();
 //		StudentUser user = studentUserDao.retrieveUser("DuZhouzhou");
 //		user.getInterestedArea().remove(0);
-//		studentUserDao.updateUser(user);
 //	}
 //
 //
@@ -97,6 +96,16 @@ public class StudentUserTest {
 		studentUserDao.updateUser(user);
 	}
 
+	private void addAnotherUserLikeEvent() {
+		StudentUserDao studentUserDao = new StudentUserDao();
+		EventDao eventDao = new EventDao();
+		StudentUser user = studentUserDao.retrieveUser("DuZhouzhou2");
+		List<Event> events = new ArrayList<Event>();
+		events.add(eventDao.retrieveEvent(1L));
+		user.setEvents(events);
+		studentUserDao.updateUser(user);
+	}
+
 	private void addLikeCompany() {
 		StudentUserDao studentUserDao = new StudentUserDao();
 		CompanyDao companyDao = new CompanyDao();
@@ -113,6 +122,23 @@ public class StudentUserTest {
 		StudentUserDao studentUserDao = new StudentUserDao();
 		StudentUser student1 = new StudentUser();
 		student1.setLogin("DuZhouzhou");
+		String password = "N0More$ecret";
+		String salt = Security.randomCharString();
+		String hash = Security.sha256(salt + password);
+		student1.setPassword(hash);
+		student1.setSalt(salt);
+		student1.setFirstName("Zhouzhou");
+		student1.setLastName("Du");
+		student1.setGender("Male");
+		student1.setEmail("john_1990@163.com");
+		studentUserDao.createUser(student1);
+	}
+	
+	private void createAnotherStudentUser() {
+		Log.debug("createAnotherStudentUser()");
+		StudentUserDao studentUserDao = new StudentUserDao();
+		StudentUser student1 = new StudentUser();
+		student1.setLogin("DuZhouzhou2");
 		String password = "N0More$ecret";
 		String salt = Security.randomCharString();
 		String hash = Security.sha256(salt + password);

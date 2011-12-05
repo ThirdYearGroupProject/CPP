@@ -2,14 +2,13 @@ package ic.doc.cpp.server.domain;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
@@ -44,7 +43,7 @@ public class CompanyUser {
     @JoinColumn(name = "company_id")
     protected Company company;
     
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "company_user_student_user",
 		joinColumns = {@JoinColumn(name = "company_login")},

@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.google.inject.Inject;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Widget;
@@ -101,6 +100,7 @@ public class PostingEventView extends ViewImpl implements
         categoryItem.setMultiple(true);
         categoryItem.setMultipleAppearance(MultipleAppearance.GRID);
         categoryItem.setHeight(60);
+        categoryItem.setDefaultValues("Loading");
         
         onlySendToStudentLikeCompany = new CheckboxItem("sendToInterestedStudent");
         onlySendToStudentLikeCompany.setTitle("Only send to Student who is <b>intersted</b> in the company?");
@@ -222,7 +222,9 @@ public class PostingEventView extends ViewImpl implements
 		for (EventCategoryDto c : categories) {
 			map.put(String.valueOf(c.getCategoryId()), getShorterName(c.getCategoryName()));
 		}
+		categoryItem.clearValue();
 		categoryItem.setValueMap(map);
+		
 	}
 
 	private String getShorterName(String categoryName) {
@@ -231,7 +233,6 @@ public class PostingEventView extends ViewImpl implements
 	
 	@Override
 	public boolean isOnlySendToInterstedStudent() {
-		GWT.log("" + onlySendToStudentLikeCompany.getValueAsBoolean());
 		return onlySendToStudentLikeCompany.getValueAsBoolean();
 	}
 

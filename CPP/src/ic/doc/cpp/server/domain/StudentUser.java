@@ -2,13 +2,12 @@ package ic.doc.cpp.server.domain;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
@@ -39,28 +38,28 @@ public class StudentUser {
 	@Column(name = "gender", length = 20, nullable = false)
 	protected String gender;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "student_user_companys",
 		joinColumns = {@JoinColumn(name = "login")},
 		inverseJoinColumns = {@JoinColumn(name = "company_id")})
 	protected List<Company> companys;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "student_user_events",
 		joinColumns = {@JoinColumn(name = "login")},
 		inverseJoinColumns = {@JoinColumn(name = "event_id")})
 	protected List<Event> events;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "student_user_dislikeEvents",
 		joinColumns = {@JoinColumn(name = "login")},
 		inverseJoinColumns = {@JoinColumn(name = "event_id")})
 	protected List<Event> dislikeEvents;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "student_user_company_category",
 		joinColumns = {@JoinColumn(name = "login")},
