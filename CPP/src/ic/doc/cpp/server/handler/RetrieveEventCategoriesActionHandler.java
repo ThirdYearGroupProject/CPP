@@ -6,9 +6,9 @@ import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
 
 import ic.doc.cpp.server.dao.EventCategoryDao;
 import ic.doc.cpp.server.domain.EventCategory;
+import ic.doc.cpp.server.util.CreateDto;
 import ic.doc.cpp.shared.action.RetrieveEventCategories;
 import ic.doc.cpp.shared.action.RetrieveEventCategoriesResult;
-import ic.doc.cpp.shared.dto.util.CreateDto;
 
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.server.ExecutionContext;

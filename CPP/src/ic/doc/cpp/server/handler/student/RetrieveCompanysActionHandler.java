@@ -2,9 +2,9 @@ package ic.doc.cpp.server.handler.student;
 
 import ic.doc.cpp.server.dao.CompanyDao;
 import ic.doc.cpp.server.domain.Company;
+import ic.doc.cpp.server.util.CreateDto;
 import ic.doc.cpp.shared.action.student.RetrieveCompanys;
 import ic.doc.cpp.shared.action.student.RetrieveCompanysResult;
-import ic.doc.cpp.shared.dto.util.CreateDto;
 
 import java.util.List;
 

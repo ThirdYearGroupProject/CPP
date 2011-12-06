@@ -2,9 +2,9 @@ package ic.doc.cpp.server.handler.student;
 
 import ic.doc.cpp.server.dao.CompanyCategoryDao;
 import ic.doc.cpp.server.domain.CompanyCategory;
+import ic.doc.cpp.server.util.CreateDto;
 import ic.doc.cpp.shared.action.student.RetrieveCompanyCategory;
 import ic.doc.cpp.shared.action.student.RetrieveCompanyCategoryResult;
-import ic.doc.cpp.shared.dto.util.CreateDto;
 
 import java.util.List;
 import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
