@@ -5,11 +5,11 @@ import ic.doc.cpp.server.dao.EventDao;
 import ic.doc.cpp.server.domain.Event;
 import ic.doc.cpp.server.domain.EventCategory;
 import ic.doc.cpp.server.domain.StudentUser;
+import ic.doc.cpp.server.util.CreateDto;
 import ic.doc.cpp.server.util.GetEntityThroughDao;
 import ic.doc.cpp.shared.action.student.RetrieveEventsUsingCategoryId;
 import ic.doc.cpp.shared.action.student.RetrieveEventsUsingCategoryIdResult;
 import ic.doc.cpp.shared.dto.EventDto;
-import ic.doc.cpp.shared.dto.util.CreateDto;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,17 +45,20 @@ public class RetrieveEventsUsingCategoryIdActionHandler
 		RetrieveEventsUsingCategoryIdResult result = null;
 		
 		try {
-			StudentUser currentUser = GetEntityThroughDao.getStudentUser(provider);
 			Long categoryId = action.getId();
 			EventCategoryDao eventCategoryDao = new EventCategoryDao();
 			EventCategory eventCategory = eventCategoryDao.retrieveEventCategory(categoryId);
 			String categoryName = eventCategory.getCategoryName();
 			Date updateTime = action.getUpdateTime();
 			EventDao eventDao = new EventDao();
+
+			StudentUser currentUser = GetEntityThroughDao.getStudentUser(provider);
 			List<Event> cleanEvents = removeDislikeEvents(currentUser, 
 					eventDao.retrieveEvents(categoryName, updateTime));
 			List<EventDto> eventDtos = CreateDto.createEventDtos(cleanEvents);
+			
 			checkIfLikedByCurrentUser(currentUser, eventDtos);
+			
 			result = new RetrieveEventsUsingCategoryIdResult(categoryId, eventDtos);
 		} catch(Exception e) {
 			throw new ActionException(e);

@@ -41,7 +41,6 @@ public class EventDetailDataSource extends DataSource {
         DataSourceTextField websiteField = new DataSourceTextField("website", "Website", 128, true);
         
         DataSourceImageField pictureField = new DataSourceImageField("picture", "Picture");
-        pictureField.setImageURLPrefix("companyLogo/");
         
         DataSourceDateField startDateField = new DataSourceDateField("startDate", "Start Date");
         

@@ -2,9 +2,9 @@ package ic.doc.cpp.server.handler.student;
 
 import ic.doc.cpp.server.dao.StudentUserDao;
 import ic.doc.cpp.server.domain.StudentUser;
+import ic.doc.cpp.server.util.CreateDto;
 import ic.doc.cpp.shared.action.student.RetrieveStudentUserInformation;
 import ic.doc.cpp.shared.action.student.RetrieveStudentUserInformationResult;
-import ic.doc.cpp.shared.dto.util.CreateDto;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

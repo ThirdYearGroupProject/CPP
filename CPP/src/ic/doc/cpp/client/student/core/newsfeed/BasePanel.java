@@ -19,6 +19,7 @@ public class BasePanel extends VLayout {
 	public BasePanel(boolean hasParent, ListGrid contents) {
 		this.hasParent = hasParent;
 		this.contents = contents;
+		
 	  	contents.setWidth100();  
 	  	contents.setHeight100();  
 	  	contents.setShowAllRecords(true);  
@@ -33,10 +34,12 @@ public class BasePanel extends VLayout {
 	  	iconField.setCanEdit(false);  
 	  	
 		ListGridField titleField = new ListGridField("title", "Title"); 
+		titleField.setCanEdit(false);
 
-		ListGridField indicatorField = new ListGridField("indicator", "Indicator", 33);
-		indicatorField.setImageSize(33);
+		ListGridField indicatorField = new ListGridField("indicator", "Indicator", 40);
 		indicatorField.setType(ListGridFieldType.IMAGE);
+		indicatorField.setImageSize(33);
+		indicatorField.setAlign(Alignment.CENTER);
 		indicatorField.setCanEdit(false);
 		
 		contents.setFields(new ListGridField[] {iconField, indicatorField, titleField});  

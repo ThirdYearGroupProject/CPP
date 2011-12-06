@@ -2,10 +2,10 @@ package ic.doc.cpp.server.handler.student;
 
 import ic.doc.cpp.server.dao.StudentUserDao;
 import ic.doc.cpp.server.domain.StudentUser;
+import ic.doc.cpp.server.util.CreateDto;
 import ic.doc.cpp.shared.action.student.RetrieveStudentInterestedEvents;
 import ic.doc.cpp.shared.action.student.RetrieveStudentInterestedEventsResult;
 import ic.doc.cpp.shared.dto.EventDto;
-import ic.doc.cpp.shared.dto.util.CreateDto;
 
 import java.util.List;
 
