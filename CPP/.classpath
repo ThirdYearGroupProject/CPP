@@ -23,7 +23,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-log-3.1.2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-multipage.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/gwtp-all-0.6.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-servlet.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/hibernate3.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/hibernate-validator-4.2.0.Final.jar"/>
@@ -43,6 +42,5 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/smartgwt.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/smartgwt-skins.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/stax-api-1.0-2.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/validation-api-1.0.0.GA.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
