@@ -100,7 +100,6 @@ public class PostingEventView extends ViewImpl implements
         categoryItem.setMultiple(true);
         categoryItem.setMultipleAppearance(MultipleAppearance.GRID);
         categoryItem.setHeight(60);
-        categoryItem.setDefaultValues("Loading");
         
         onlySendToStudentLikeCompany = new CheckboxItem("sendToInterestedStudent");
         onlySendToStudentLikeCompany.setTitle("Only send to Student who is <b>intersted</b> in the company?");
