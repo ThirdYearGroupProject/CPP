@@ -39,23 +39,15 @@ public class SignInPagePresenter extends
 
 		String getPassword();
 
+		String getUserType();
+		
 		void resetAndFocus();
-
-		String getCompanyUserPassword();
-
-		String getCompanyUserName();
 
 		HandlerRegistration addSignInButtonClickHandler(
 				ClickHandler clickHandler);
 
 		void resetAndFocusCompanyUser();
 
-		HandlerRegistration addCompanyUserSignInButtonClickHandler(
-				ClickHandler clickHandler);
-
-		String getUserName(String type);
-
-		String getPassword(String type);
 		
 	}
 
@@ -77,20 +69,6 @@ public class SignInPagePresenter extends
 	  @Override
 	  protected void onBind() {
 	    super.onBind();
-	    registerHandler(getView().addCompanyUserSignInButtonClickHandler(
-	    		new ClickHandler() {
-			
-			@Override
-			public void onClick(ClickEvent event) {
-				if (FieldVerifier.isValidUserName(getView().getUserName()) 
-						&& (FieldVerifier.isValidPassword(getView().getPassword()))) {
-					sendCredentialsToServer("company");
-				} else {
-					SC.say("Sign in", "You must enter a valid User name and Password.");
-					getView().resetAndFocus();
-				}
-			}
-		}));
 	    
 	    registerHandler(getView().addSignInButtonClickHandler(
 	        new ClickHandler() {
@@ -98,7 +76,7 @@ public class SignInPagePresenter extends
 	          public void onClick(ClickEvent event) {
 	        	  if (FieldVerifier.isValidUserName(getView().getUserName()) 
 	        			  && (FieldVerifier.isValidPassword(getView().getPassword()))) {
-	        		  sendCredentialsToServer("student");
+	        		  sendCredentialsToServer(getView().getUserType());
 	        	  } else {
 	        		  SC.say("Sign in", "You must enter a valid User name and Password.");
 	        		  getView().resetAndFocus();
@@ -121,8 +99,8 @@ public class SignInPagePresenter extends
 		  if (type == null)
 			  return;
 		  
-		  String login = getView().getUserName(type);
-		  String password = getView().getPassword(type);
+		  String login = getView().getUserName();
+		  String password = getView().getPassword();
 		  
 		  dispatcher.execute(new Login(type, login, password),
 				  new AsyncCallback<LoginResult>() {
