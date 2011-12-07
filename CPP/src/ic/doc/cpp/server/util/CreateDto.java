@@ -60,10 +60,12 @@ public class CreateDto {
 	}
 
 	public static CompanyDto createCompanyDto(Company company) {
-		return new CompanyDto(company.getCompanyId(), company.getName(), 
+		CompanyDto companyDto =  new CompanyDto(company.getCompanyId(), company.getName(), 
 				createCompanyCategoryDto(company.getCategory()), 
 				createEventDtos(company.getEvents()), company.getDescription(), 
 				company.getWebsite(), company.getLogo());
+		
+		return companyDto;
 	}
 
 	public static EventCategoryDto createEventCategoryDto(EventCategory category) {

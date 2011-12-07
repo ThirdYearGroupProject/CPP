@@ -112,7 +112,7 @@ public class PostingEventView extends ViewImpl implements
         richTextEditor.setOverflow(Overflow.HIDDEN);
         richTextEditor.setBorder("1px solid black");
         richTextEditor.setControlGroups("formatControls", "styleControls", "colorControls");
-        richTextEditor.setValue("<font face=\"Bookman Old Style, Book Antiqua, Garamond\"></font>");
+//        richTextEditor.setValue("<font face=\"Bookman Old Style, Book Antiqua, Garamond\"></font>");
         
 		body.addMember(mainForm);
 		body.addMember(richTextEditor);
@@ -223,7 +223,6 @@ public class PostingEventView extends ViewImpl implements
 		}
 		categoryItem.clearValue();
 		categoryItem.setValueMap(map);
-		
 	}
 
 	private String getShorterName(String categoryName) {

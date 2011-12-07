@@ -45,6 +45,10 @@ import ic.doc.cpp.shared.action.RetrieveEventCategories;
 import ic.doc.cpp.server.handler.RetrieveEventCategoriesActionHandler;
 import ic.doc.cpp.server.handler.PostEventActionHandler;
 import ic.doc.cpp.server.handler.student.GetStudentLoginActionHandler;
+import ic.doc.cpp.shared.action.RetrieveCompanyInformation;
+import ic.doc.cpp.server.handler.RetrieveCompanyInformationActionHandler;
+import ic.doc.cpp.shared.action.UpdateCompanyInformation;
+import ic.doc.cpp.server.handler.UpdateCompanyInformationActionHandler;
 
 public class ServerModule extends HandlerModule {
 
@@ -126,6 +130,14 @@ public class ServerModule extends HandlerModule {
 				LoggedInActionValidator.class);
 
 		bindHandler(GetStudentLogin.class, GetStudentLoginActionHandler.class,
+				LoggedInActionValidator.class);
+
+		bindHandler(RetrieveCompanyInformation.class,
+				RetrieveCompanyInformationActionHandler.class,
+				LoggedInActionValidator.class);
+
+		bindHandler(UpdateCompanyInformation.class,
+				UpdateCompanyInformationActionHandler.class,
 				LoggedInActionValidator.class);
 	}
 }
