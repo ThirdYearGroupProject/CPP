@@ -61,6 +61,8 @@ public class CompanyUserDao extends BaseDao {
 			cq.where(cb.equal(s.get(CompanyUser_.login), login));
 			TypedQuery<CompanyUser> query = em.createQuery(cq);
 			user = query.getSingleResult();
+		} catch (Throwable t) {
+			t.printStackTrace();
 		} finally {
 			em.close();
 		}

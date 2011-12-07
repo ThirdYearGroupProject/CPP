@@ -16,7 +16,7 @@ public class ToolsNavigationPaneSectionData {
 	  public static ListgridSectionStackSectionRecord[] getNewRecords() {
 		return new ListgridSectionStackSectionRecord[]{
 				new ListgridSectionStackSectionRecord("opportunity", NameTokens.eventfeed, "News Feed", null),
-				new ListgridSectionStackSectionRecord("profile", NameTokens.profile, "User Profile", null),
+				new ListgridSectionStackSectionRecord("profile", NameTokens.studentprofile, "User Profile", null),
 				new ListgridSectionStackSectionRecord("calendar", NameTokens.calendar, "Calendar", null),
 		};
 	  }

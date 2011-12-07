@@ -14,7 +14,6 @@ import ic.doc.cpp.client.student.core.calendar.CalendarPresenter;
 import ic.doc.cpp.client.student.core.companydata.CompanyDataPresenter;
 import ic.doc.cpp.client.student.core.eventdata.EventDataPresenter;
 import ic.doc.cpp.client.student.core.newsfeed.EventsFeedPresenter;
-import ic.doc.cpp.client.student.core.profile.StudentUserProfilePresenter;
 
 import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.event.shared.EventBus;
@@ -22,6 +21,11 @@ import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import ic.doc.cpp.client.company.core.CompanyPagePresenter;
 import ic.doc.cpp.client.company.core.postingevent.PostingEventPresenter;
+import ic.doc.cpp.client.student.core.profile.StudentProfilePresenter;
+import ic.doc.cpp.client.student.core.profile.StudentGeneralInfoPresenter;
+import ic.doc.cpp.client.student.core.profile.StudentInterestedAreaPresenter;
+import ic.doc.cpp.client.student.core.profile.StudentInterestedCompanyPresenter;
+import ic.doc.cpp.client.student.core.profile.StudentProfileSecurityPresenter;
 
 @GinModules({ DispatchAsyncModule.class, ClientModule.class })
 public interface ClientGinjector extends Ginjector {
@@ -42,8 +46,6 @@ public interface ClientGinjector extends Ginjector {
 	
 	LoggedInGatekeeper getLoggedInGatekeeper();
 
-	AsyncProvider<StudentUserProfilePresenter> getStudentUserProfilePresenter();
-
 	AsyncProvider<ErrorPagePresenter> getErrorPagePresenter();
 
 	AsyncProvider<AutoMatchPresenter> getAutoMatchPresenter();
@@ -53,4 +55,15 @@ public interface ClientGinjector extends Ginjector {
 	AsyncProvider<CompanyPagePresenter> getCompanyPagePresenter();
 
 	AsyncProvider<PostingEventPresenter> getPostingEventPresenter();
+
+	AsyncProvider<StudentProfilePresenter> getStudentProfilePresenter();
+
+	AsyncProvider<StudentGeneralInfoPresenter> getStudentGeneralInfoPresenter();
+
+	AsyncProvider<StudentInterestedAreaPresenter> getStudentInterestedAreaPresenter();
+
+	AsyncProvider<StudentInterestedCompanyPresenter> getStudentInterestedCompanyPresenter();
+
+	AsyncProvider<StudentProfileSecurityPresenter> getStudentProfileSecurityPresenter();
+
 }

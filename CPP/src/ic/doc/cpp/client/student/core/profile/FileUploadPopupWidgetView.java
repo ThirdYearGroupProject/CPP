@@ -56,7 +56,7 @@ public class FileUploadPopupWidgetView extends PopupViewImpl implements
 	    southLayout.setHeight100();
 
 	    // add the nested layout containers to the main layout containers
-	    VLayout header = StudentUserProfileView.initHeader(NAME,DESCRIPTION);
+	    VLayout header = StudentProfileView.initHeader(NAME,DESCRIPTION);
 	    header.setStyleName("popup-header");
 	    northLayout.addMember(header);
 	    southLayout.addMember(initBody());

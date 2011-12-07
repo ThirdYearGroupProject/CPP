@@ -50,17 +50,21 @@ import ic.doc.cpp.client.student.core.newsfeed.MainfestWidgetPresenter;
 import ic.doc.cpp.client.student.core.newsfeed.MainfestWidgetView;
 import ic.doc.cpp.client.student.core.profile.FileUploadPopupWidgetPresenter;
 import ic.doc.cpp.client.student.core.profile.FileUploadPopupWidgetView;
-import ic.doc.cpp.client.student.core.profile.InterestedAreaWidgetPresenter;
-import ic.doc.cpp.client.student.core.profile.InterestedAreaWidgetView;
-import ic.doc.cpp.client.student.core.profile.InterestedCompanyWidgetPresenter;
-import ic.doc.cpp.client.student.core.profile.InterestedCompanyWidgetView;
-import ic.doc.cpp.client.student.core.profile.StudentUserProfilePresenter;
-import ic.doc.cpp.client.student.core.profile.StudentUserProfileView;
 import ic.doc.cpp.shared.SharedTokens;
 import ic.doc.cpp.client.company.core.CompanyPagePresenter;
 import ic.doc.cpp.client.company.core.CompanyPageView;
 import ic.doc.cpp.client.company.core.postingevent.PostingEventPresenter;
 import ic.doc.cpp.client.company.core.postingevent.PostingEventView;
+import ic.doc.cpp.client.student.core.profile.StudentProfilePresenter;
+import ic.doc.cpp.client.student.core.profile.StudentProfileView;
+import ic.doc.cpp.client.student.core.profile.StudentGeneralInfoPresenter;
+import ic.doc.cpp.client.student.core.profile.StudentGeneralInfoView;
+import ic.doc.cpp.client.student.core.profile.StudentInterestedAreaPresenter;
+import ic.doc.cpp.client.student.core.profile.StudentInterestedAreaView;
+import ic.doc.cpp.client.student.core.profile.StudentInterestedCompanyPresenter;
+import ic.doc.cpp.client.student.core.profile.StudentInterestedCompanyView;
+import ic.doc.cpp.client.student.core.profile.StudentProfileSecurityPresenter;
+import ic.doc.cpp.client.student.core.profile.StudentProfileSecurityView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -133,11 +137,6 @@ public class ClientModule extends AbstractPresenterModule {
 				CompanyCategoryWidgetPresenter.MyView.class,
 				CompanyCategoryWidgetView.class);
 
-		bindPresenter(StudentUserProfilePresenter.class,
-				StudentUserProfilePresenter.MyView.class,
-				StudentUserProfileView.class,
-				StudentUserProfilePresenter.MyProxy.class);
-
 		bindPresenter(ErrorPagePresenter.class,
 				ErrorPagePresenter.MyView.class, ErrorPageView.class,
 				ErrorPagePresenter.MyProxy.class);
@@ -145,12 +144,6 @@ public class ClientModule extends AbstractPresenterModule {
 		bindPresenter(AutoMatchPresenter.class,
 				AutoMatchPresenter.MyView.class, AutoMatchView.class,
 				AutoMatchPresenter.MyProxy.class);
-
-		bindSingletonPresenterWidget(InterestedCompanyWidgetPresenter.class,
-				InterestedCompanyWidgetPresenter.MyView.class,
-				InterestedCompanyWidgetView.class);
-
-
 
 		bindSingletonPresenterWidget(MainfestWidgetPresenter.class,
 				MainfestWidgetPresenter.MyView.class, MainfestWidgetView.class);
@@ -168,10 +161,6 @@ public class ClientModule extends AbstractPresenterModule {
 				FileUploadPopupWidgetPresenter.MyView.class,
 				FileUploadPopupWidgetView.class);
 
-		bindSingletonPresenterWidget(InterestedAreaWidgetPresenter.class,
-				InterestedAreaWidgetPresenter.MyView.class,
-				InterestedAreaWidgetView.class);
-
 		bindPresenter(CompanyPagePresenter.class,
 				CompanyPagePresenter.MyView.class, CompanyPageView.class,
 				CompanyPagePresenter.MyProxy.class);
@@ -179,5 +168,30 @@ public class ClientModule extends AbstractPresenterModule {
 		bindPresenter(PostingEventPresenter.class,
 				PostingEventPresenter.MyView.class, PostingEventView.class,
 				PostingEventPresenter.MyProxy.class);
+
+
+		bindPresenter(StudentProfilePresenter.class,
+				StudentProfilePresenter.MyView.class, StudentProfileView.class,
+				StudentProfilePresenter.MyProxy.class);
+
+		bindPresenter(StudentGeneralInfoPresenter.class,
+				StudentGeneralInfoPresenter.MyView.class,
+				StudentGeneralInfoView.class,
+				StudentGeneralInfoPresenter.MyProxy.class);
+
+		bindPresenter(StudentInterestedAreaPresenter.class,
+				StudentInterestedAreaPresenter.MyView.class,
+				StudentInterestedAreaView.class,
+				StudentInterestedAreaPresenter.MyProxy.class);
+
+		bindPresenter(StudentInterestedCompanyPresenter.class,
+				StudentInterestedCompanyPresenter.MyView.class,
+				StudentInterestedCompanyView.class,
+				StudentInterestedCompanyPresenter.MyProxy.class);
+
+		bindPresenter(StudentProfileSecurityPresenter.class,
+				StudentProfileSecurityPresenter.MyView.class,
+				StudentProfileSecurityView.class,
+				StudentProfileSecurityPresenter.MyProxy.class);
 	}
 }

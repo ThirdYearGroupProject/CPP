@@ -12,6 +12,11 @@ public class NameTokens {
 	public static final String eventfeed = "eventfeed";
 	public static final String companypage = "companypage";
 	public static final String postevent = "postevent";
+	public static final String studentprofile = "studentprofile";
+	public static final String studentprofilegeneralinfo = "studentprofilegeneralinfo";
+	public static final String studentprofileinterestedarea = "studentprofileinterestedarea";
+	public static final String studentprofileinterestedcompany = "studentprofileinterestedcompany";
+	public static final String studentprofilesecurity = "studentprofilesecurity";
 
 	public static String getStudentpage() {
 		return studentpage;
@@ -56,4 +61,25 @@ public class NameTokens {
 	public static String getPostevent() {
 		return postevent;
 	}
+
+	public static String getStudentprofile() {
+		return studentprofile;
+	}
+
+	public static String getStudentprofilegeneralinfo() {
+		return studentprofilegeneralinfo;
+	}
+
+	public static String getStudentprofileinterestedarea() {
+		return studentprofileinterestedarea;
+	}
+
+	public static String getStudentprofileinterestedcompany() {
+		return studentprofileinterestedcompany;
+	}
+
+	public static String getStudentprofilesecurity() {
+		return studentprofilesecurity;
+	}
+
 }

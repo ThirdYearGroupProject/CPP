@@ -5,7 +5,6 @@ import ic.doc.cpp.client.place.NameTokens;
 import ic.doc.cpp.shared.FieldVerifier;
 import ic.doc.cpp.shared.action.student.Login;
 import ic.doc.cpp.shared.action.student.LoginResult;
-import ic.doc.cpp.shared.exception.LoginException;
 
 import com.gwtplatform.dispatch.shared.DispatchAsync;
 import com.gwtplatform.mvp.client.Presenter;
@@ -39,15 +38,23 @@ public class SignInPagePresenter extends
 
 		String getPassword();
 
-		String getUserType();
-		
 		void resetAndFocus();
+
+		String getCompanyUserPassword();
+
+		String getCompanyUserName();
 
 		HandlerRegistration addSignInButtonClickHandler(
 				ClickHandler clickHandler);
 
 		void resetAndFocusCompanyUser();
 
+		HandlerRegistration addCompanyUserSignInButtonClickHandler(
+				ClickHandler clickHandler);
+
+		String getUserName(String type);
+
+		String getPassword(String type);
 		
 	}
 
@@ -69,6 +76,20 @@ public class SignInPagePresenter extends
 	  @Override
 	  protected void onBind() {
 	    super.onBind();
+	    registerHandler(getView().addCompanyUserSignInButtonClickHandler(
+	    		new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				if (FieldVerifier.isValidUserName(getView().getUserName()) 
+						&& (FieldVerifier.isValidPassword(getView().getPassword()))) {
+					sendCredentialsToServer("company");
+				} else {
+					SC.say("Sign in", "You must enter a valid User name and Password.");
+					getView().resetAndFocus();
+				}
+			}
+		}));
 	    
 	    registerHandler(getView().addSignInButtonClickHandler(
 	        new ClickHandler() {
@@ -76,7 +97,7 @@ public class SignInPagePresenter extends
 	          public void onClick(ClickEvent event) {
 	        	  if (FieldVerifier.isValidUserName(getView().getUserName()) 
 	        			  && (FieldVerifier.isValidPassword(getView().getPassword()))) {
-	        		  sendCredentialsToServer(getView().getUserType());
+	        		  sendCredentialsToServer("student");
 	        	  } else {
 	        		  SC.say("Sign in", "You must enter a valid User name and Password.");
 	        		  getView().resetAndFocus();
@@ -99,22 +120,16 @@ public class SignInPagePresenter extends
 		  if (type == null)
 			  return;
 		  
-		  String login = getView().getUserName();
-		  String password = getView().getPassword();
+		  String login = getView().getUserName(type);
+		  String password = getView().getPassword(type);
 		  
 		  dispatcher.execute(new Login(type, login, password),
 				  new AsyncCallback<LoginResult>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						String message = "onFailure() - " + caught.getLocalizedMessage();
-					        
-						if (caught instanceof LoginException) {
-							message = "onFailure() - " + "Invalid User name or Password." ;
-						}
-			          
 						getView().resetAndFocus();
-						SC.say(message);
+						SC.say("Invalid User name or password.");
 					}
 
 					@Override
