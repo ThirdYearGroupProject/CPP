@@ -56,6 +56,8 @@ public class LoginActionHandler implements ActionHandler<Login, LoginResult> {
 					HttpSession session = requestProvider.get().getSession();
 					session.setAttribute("login.authenticated", action.getLogin());
 					result = new LoginResult(session.getId());
+				} else {
+					throw new LoginException("Invalid user name or password.");
 				}
 			} catch (Exception e) {
 				throw new ActionException(e);
