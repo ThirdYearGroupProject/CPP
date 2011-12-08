@@ -8,7 +8,6 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.smartgwt.client.types.Side;
 import com.smartgwt.client.types.TitleOrientation;
-import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.HTMLPane;
 import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.form.DynamicForm;
@@ -38,7 +37,7 @@ public class SignInPageView extends ViewImpl implements
 	@Inject
 	public SignInPageView() {
 		mainLayout = new VLayout();
-		mainLayout.setHeight("50%");
+		mainLayout.setHeight100();
 		mainLayout.setWidth100();
 
 		HLayout topPanel = new HLayout();
@@ -58,10 +57,13 @@ public class SignInPageView extends ViewImpl implements
 		passwordField.setTitle("<font size='3' color='white'>Password</font>");
 		passwordField.setRequired(true);
 
+		userNameField.setValue("DuZhouzhou");
+		passwordField.setValue("N0More$ecret");
+		
 		userType = new SelectItem();
 		userType.setTitle("<font size='3' color='white'>User Type</font>");
-		userType.setValueMap("Admin", "Student", "Company");
-		userType.setDefaultValue("Student");
+		userType.setValueMap("admin", "student", "company");
+		userType.setDefaultValue("student");
 
 		signInButton = new Button("Log In");
 
@@ -138,7 +140,6 @@ public class SignInPageView extends ViewImpl implements
 		TabSet regTabSet = new TabSet();
 		regTabSet.setTabBarPosition(Side.TOP);
 		regTabSet.setWidth("50%");
-		regTabSet.setHeight("20%");
 
 		Tab tTabStudent = new Tab();
 		tTabStudent.setPane(studentRegForm);
@@ -150,14 +151,14 @@ public class SignInPageView extends ViewImpl implements
 
 		regTabSet.addTab(tTabStudent);
 		regTabSet.addTab(tTabCompany);
-
+		
 		regPanel.addMember(regWelcome);
 		regPanel.addMember(regTabSet);
 		// regPanel.addMember(regButton);
 
 		southPanel.addMember(CPPdescription);
 		southPanel.addMember(regPanel);
-
+		
 		mainLayout.addMember(topPanel);
 		mainLayout.addMember(southPanel);
 		mainLayout.draw();

@@ -22,7 +22,7 @@
 	  <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
       <property name="hibernate.connection.url" value="jdbc:postgresql://localhost/postgres" />
 	  <property name="hibernate.connection.username" value="postgres" />
-	  <property name="hibernate.connection.password" value="dzziqbaby" />
+	  <property name="hibernate.connection.password" value="1234888" />
 
       <!-- JDBC connection pool (use the built-in) -->
 	  <property name="connection.pool_size" value="1" />
