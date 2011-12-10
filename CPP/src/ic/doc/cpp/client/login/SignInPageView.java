@@ -31,16 +31,25 @@ public class SignInPageView extends ViewImpl implements
 	private Button signInButton;
 	
 	//---------field below are for registration------
-	private TextItem userNameField2;
-	private PasswordItem passwordField2;
+	private TextItem regUserName;
+	private PasswordItem regPassword;
 	private Button regButton;
 	private TextItem emailField;
 	private TextItem FirstNameField;
 	private TextItem LastNameField;
 	private SelectItem gender;
-	private TextItem Company;
 	private TabSet regTabSet;
 
+	//---------field below are for company registration------
+	private TextItem regUserName2;
+	private PasswordItem regPassword2;
+	private TextItem emailField2;
+	private TextItem FirstNameField2;
+	private TextItem LastNameField2;
+	private SelectItem gender2;
+	private TextItem Company;
+	
+	
 	@Inject
 	public SignInPageView() {
 		mainLayout = new VLayout();
@@ -110,13 +119,13 @@ public class SignInPageView extends ViewImpl implements
 				"<font size='4' color='black'>Welcome to register</font>");
 		DynamicForm studentRegForm = new DynamicForm();
 
-		userNameField2 = new TextItem();
-		userNameField2.setTitle("<font size='2' color='black'>Username</font>");
-		userNameField2.setRequired(true);
+		regUserName = new TextItem();
+		regUserName.setTitle("<font size='2' color='black'>Username</font>");
+		regUserName.setRequired(true);
 
-		passwordField2 = new PasswordItem();
-		passwordField2.setTitle("<font size='2' color='black'>Password</font>");
-		passwordField2.setRequired(true);
+		regPassword = new PasswordItem();
+		regPassword.setTitle("<font size='2' color='black'>Password</font>");
+		regPassword.setRequired(true);
 
 		FirstNameField = new TextItem();
 		FirstNameField.setTitle("<font size='2' color='black'>First Name</font>");
@@ -135,17 +144,42 @@ public class SignInPageView extends ViewImpl implements
 		gender.setValueMap("Male", "Female");
 		gender.setDefaultValue("Male");
 	
-		studentRegForm.setFields(new FormItem[] { userNameField2,
-				passwordField2,LastNameField,FirstNameField,emailField,gender});
+		studentRegForm.setFields(new FormItem[] { regUserName,
+				regPassword,LastNameField,FirstNameField,emailField,gender});
 
 		DynamicForm companyRegForm = new DynamicForm();
+		
+		regUserName2 = new TextItem();
+		regUserName2.setTitle("<font size='2' color='black'>Username</font>");
+		regUserName2.setRequired(true);
 
+		regPassword2 = new PasswordItem();
+		regPassword2.setTitle("<font size='2' color='black'>Password</font>");
+		regPassword2.setRequired(true);
+
+		FirstNameField2 = new TextItem();
+		FirstNameField2.setTitle("<font size='2' color='black'>First Name</font>");
+		FirstNameField2.setRequired(true);
+		
+		LastNameField2 = new TextItem();
+		LastNameField2.setTitle("<font size='2' color='black'>Last Name</font>");
+		LastNameField2.setRequired(true);
+		
+		emailField2 = new TextItem();
+		emailField2.setTitle("<font size='2' color='black'>Email</font>");
+		emailField2.setRequired(true);
+		
+		gender2 = new SelectItem();
+		gender2.setTitle("<font size='2' color='black'>gender</font>");
+		gender2.setValueMap("Male", "Female");
+		gender2.setDefaultValue("Male");
+		
 		Company = new TextItem();
 		Company.setTitle("<font size='2' color='black'>Company Name</font>");
 		Company.setRequired(true);
 		
-		companyRegForm.setFields(new FormItem[] { userNameField2,
-				passwordField2,LastNameField,FirstNameField,emailField,gender,Company });
+		companyRegForm.setFields(new FormItem[] { regUserName2,
+				regPassword2,LastNameField2,FirstNameField2,emailField2,gender2,Company });
 
 		regTabSet = new TabSet();
 		regTabSet.setTabBarPosition(Side.TOP);
@@ -153,10 +187,10 @@ public class SignInPageView extends ViewImpl implements
 
 		Tab tTabStudent = new Tab();
 		tTabStudent.setPane(studentRegForm);
-		tTabStudent.setTitle("Student");
+		tTabStudent.setTitle("student");
 
 		Tab tTabCompany = new Tab();
-		tTabCompany.setTitle("Company");
+		tTabCompany.setTitle("company");
 		tTabCompany.setPane(companyRegForm);
 
 		regTabSet.addTab(tTabStudent);
@@ -224,32 +258,62 @@ public class SignInPageView extends ViewImpl implements
 
 	@Override
 	public String getRegUserName() {
-		return userNameField2.getValueAsString();
+		if(getRegType().equals("company")){
+			return regUserName2.getValueAsString();
+		}else{
+			return regUserName.getValueAsString();
+		}
+
 	}
 	
 	@Override
 	public String getRegPassword() {
-		return passwordField2.getValueAsString();
+		if(getRegType().equals("company")){
+			return regPassword2.getValueAsString();
+		}else{
+			return regPassword.getValueAsString();
+		}
+
 	}
 
 	@Override
 	public String getRegLastName() {
-		return LastNameField.getValueAsString();
+		if(getRegType().equals("company")){
+			return LastNameField2.getValueAsString();
+		}else{
+			return LastNameField.getValueAsString();
+		}
+
 	}
 
 	@Override
 	public String getRegFirstName() {
-		return FirstNameField.getValueAsString();
+		if(getRegType().equals("company")){
+			return FirstNameField2.getValueAsString();
+		}else{
+			return FirstNameField.getValueAsString();
+		}	
+
 	}
 
 	@Override
 	public String getRegEmail() {
-		return emailField.getValueAsString();
+		if(getRegType().equals("company")){
+			return emailField2.getValueAsString();
+		}else{
+			return emailField.getValueAsString();
+		}
+
 	}
 
 	@Override
 	public String getRegGender() {
-		return gender.getValueAsString();
+		if(getRegType().equals("company")){
+			return gender2.getValueAsString();
+		}else{
+			return gender.getValueAsString();
+		}
+		
 	}
 
 	@Override

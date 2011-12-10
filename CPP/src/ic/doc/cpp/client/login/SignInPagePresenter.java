@@ -139,7 +139,7 @@ public class SignInPagePresenter extends
 		String gender = getView().getRegGender();
 		String company = getView().getRegCompany();
 		
-		dispatcher.execute(new Registration( login, password, email, gender, firstName, lastName, company, type),
+		dispatcher.execute(new Registration( login, password, email, gender,company, firstName, lastName, type),
 				new AsyncCallback<RegistrationResult>() {
 
 					@Override
