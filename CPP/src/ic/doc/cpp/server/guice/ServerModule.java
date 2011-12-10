@@ -41,7 +41,9 @@ import ic.doc.cpp.shared.action.student.UpdatePassword;
 import ic.doc.cpp.shared.action.student.UpdateStudentInterestedAreas;
 import ic.doc.cpp.shared.action.student.UpdateStudentUserInformation;
 import ic.doc.cpp.shared.action.PostEvent;
+import ic.doc.cpp.shared.action.Registration;
 import ic.doc.cpp.shared.action.RetrieveEventCategories;
+import ic.doc.cpp.server.handler.RegistrationActionHandler;
 import ic.doc.cpp.server.handler.RetrieveEventCategoriesActionHandler;
 import ic.doc.cpp.server.handler.PostEventActionHandler;
 import ic.doc.cpp.server.handler.student.GetStudentLoginActionHandler;
@@ -127,5 +129,8 @@ public class ServerModule extends HandlerModule {
 
 		bindHandler(GetStudentLogin.class, GetStudentLoginActionHandler.class,
 				LoggedInActionValidator.class);
+		
+		bindHandler(Registration.class, RegistrationActionHandler.class);
+		
 	}
 }

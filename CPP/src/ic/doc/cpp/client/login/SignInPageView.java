@@ -1,17 +1,17 @@
 package ic.doc.cpp.client.login;
 
-import com.google.gwt.event.dom.client.ClickHandler;
+
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.smartgwt.client.types.Side;
 import com.smartgwt.client.types.TitleOrientation;
+import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.HTMLPane;
 import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.events.ClickHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
-import com.smartgwt.client.widgets.form.fields.ButtonItem;
 import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.PasswordItem;
 import com.smartgwt.client.widgets.form.fields.SelectItem;
@@ -29,10 +29,17 @@ public class SignInPageView extends ViewImpl implements
 	private PasswordItem passwordField;
 	private SelectItem userType;
 	private Button signInButton;
+	
+	//---------field below are for registration------
 	private TextItem userNameField2;
 	private PasswordItem passwordField2;
-	private SelectItem userType2;
-	private ButtonItem regButton;
+	private Button regButton;
+	private TextItem emailField;
+	private TextItem FirstNameField;
+	private TextItem LastNameField;
+	private SelectItem gender;
+	private TextItem Company;
+	private TabSet regTabSet;
 
 	@Inject
 	public SignInPageView() {
@@ -45,7 +52,7 @@ public class SignInPageView extends ViewImpl implements
 		topPanel.setHeight("10%");
 
 		Label CppHeader = new Label(
-				"<font size='6' color='white'>Cooperative Partnership Programme</font>");
+				"<span><font size='6' color='white'>Cooperative Partnership Programme</font></span>");
 		CppHeader.setWidth("150%");
 
 		DynamicForm loginForm = new DynamicForm();
@@ -65,7 +72,7 @@ public class SignInPageView extends ViewImpl implements
 		userType.setValueMap("admin", "student", "company");
 		userType.setDefaultValue("student");
 
-		signInButton = new Button("Log In");
+		signInButton = new Button("LogIn");
 
 		loginForm.setWidth100();
 		loginForm.setFields(new FormItem[] { userNameField, passwordField,
@@ -111,33 +118,36 @@ public class SignInPageView extends ViewImpl implements
 		passwordField2.setTitle("<font size='2' color='black'>Password</font>");
 		passwordField2.setRequired(true);
 
-		userType2 = new SelectItem();
-		userType2.setTitle("<font size='2' color='black'>UserType</font>");
-		userType2.setValueMap("Admin", "Student", "Company");
-
-		regButton = new ButtonItem("Registrate");
+		FirstNameField = new TextItem();
+		FirstNameField.setTitle("<font size='2' color='black'>First Name</font>");
+		FirstNameField.setRequired(true);
+		
+		LastNameField = new TextItem();
+		LastNameField.setTitle("<font size='2' color='black'>Last Name</font>");
+		LastNameField.setRequired(true);
+		
+		emailField = new TextItem();
+		emailField.setTitle("<font size='2' color='black'>Email</font>");
+		emailField.setRequired(true);
+		
+		gender = new SelectItem();
+		gender.setTitle("<font size='2' color='black'>gender</font>");
+		gender.setValueMap("Male", "Female");
+		gender.setDefaultValue("Male");
+	
 		studentRegForm.setFields(new FormItem[] { userNameField2,
-				passwordField2, userType2, regButton });
+				passwordField2,LastNameField,FirstNameField,emailField,gender});
 
 		DynamicForm companyRegForm = new DynamicForm();
 
-		userNameField2 = new TextItem();
-		userNameField2.setTitle("<font size='2' color='black'>Username</font>");
-		userNameField2.setRequired(true);
-
-		passwordField2 = new PasswordItem();
-		passwordField2.setTitle("<font size='2' color='black'>Password</font>");
-		passwordField2.setRequired(true);
-
-		userType2 = new SelectItem();
-		userType2.setTitle("<font size='2' color='black'>UserType</font>");
-		userType2.setValueMap("Admin", "Student", "Company");
-
-		regButton = new ButtonItem("Registrate");
+		Company = new TextItem();
+		Company.setTitle("<font size='2' color='black'>Company Name</font>");
+		Company.setRequired(true);
+		
 		companyRegForm.setFields(new FormItem[] { userNameField2,
-				passwordField2, userType2, regButton });
+				passwordField2,LastNameField,FirstNameField,emailField,gender,Company });
 
-		TabSet regTabSet = new TabSet();
+		regTabSet = new TabSet();
 		regTabSet.setTabBarPosition(Side.TOP);
 		regTabSet.setWidth("50%");
 
@@ -152,9 +162,11 @@ public class SignInPageView extends ViewImpl implements
 		regTabSet.addTab(tTabStudent);
 		regTabSet.addTab(tTabCompany);
 		
+		regButton = new Button("Registrate");
+		
 		regPanel.addMember(regWelcome);
 		regPanel.addMember(regTabSet);
-		// regPanel.addMember(regButton);
+		regPanel.addMember(regButton);
 
 		southPanel.addMember(CPPdescription);
 		southPanel.addMember(regPanel);
@@ -189,14 +201,63 @@ public class SignInPageView extends ViewImpl implements
 	}
 
 	@Override
+	public String getUserType() {
+		return userType.getValueAsString();
+	}
+
+	@Override
 	public HandlerRegistration addSignInButtonClickHandler(
 			ClickHandler clickHandler) {
 		return signInButton.addClickHandler(clickHandler);
 	}
 
 	@Override
-	public String getUserType() {
-		return userType.getValueAsString();
+	public HandlerRegistration addRegButtonClickHandler(
+			ClickHandler clickHandler) {
+		return regButton.addClickHandler( clickHandler);
 	}
+
+	@Override
+	public String getRegType() {
+		return regTabSet.getSelectedTab().getTitle();
+	}
+
+	@Override
+	public String getRegUserName() {
+		return userNameField2.getValueAsString();
+	}
+	
+	@Override
+	public String getRegPassword() {
+		return passwordField2.getValueAsString();
+	}
+
+	@Override
+	public String getRegLastName() {
+		return LastNameField.getValueAsString();
+	}
+
+	@Override
+	public String getRegFirstName() {
+		return FirstNameField.getValueAsString();
+	}
+
+	@Override
+	public String getRegEmail() {
+		return emailField.getValueAsString();
+	}
+
+	@Override
+	public String getRegGender() {
+		return gender.getValueAsString();
+	}
+
+	@Override
+	public String getRegCompany() {
+		return Company.getValueAsString();
+	}
+
+
+
 
 }
