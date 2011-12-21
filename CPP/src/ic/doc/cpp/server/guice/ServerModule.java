@@ -40,13 +40,17 @@ import ic.doc.cpp.shared.action.student.RetrieveStudentUserInformation;
 import ic.doc.cpp.shared.action.student.UpdatePassword;
 import ic.doc.cpp.shared.action.student.UpdateStudentInterestedAreas;
 import ic.doc.cpp.shared.action.student.UpdateStudentUserInformation;
+import ic.doc.cpp.shared.action.AdminGetAllC;
 import ic.doc.cpp.shared.action.PostEvent;
+import ic.doc.cpp.shared.action.RegCompany;
 import ic.doc.cpp.shared.action.Registration;
 import ic.doc.cpp.shared.action.RetrieveEventCategories;
 import ic.doc.cpp.server.handler.RegistrationActionHandler;
 import ic.doc.cpp.server.handler.RetrieveEventCategoriesActionHandler;
 import ic.doc.cpp.server.handler.PostEventActionHandler;
 import ic.doc.cpp.server.handler.student.GetStudentLoginActionHandler;
+import ic.doc.cpp.server.handler.AdminGetAllCActionHandler;
+import ic.doc.cpp.server.handler.RegCompanyActionHandler;
 
 public class ServerModule extends HandlerModule {
 
@@ -131,6 +135,11 @@ public class ServerModule extends HandlerModule {
 				LoggedInActionValidator.class);
 		
 		bindHandler(Registration.class, RegistrationActionHandler.class);
-		
+
+		bindHandler(AdminGetAllC.class, AdminGetAllCActionHandler.class,
+				LoggedInActionValidator.class);
+
+		bindHandler(RegCompany.class, RegCompanyActionHandler.class,
+				LoggedInActionValidator.class);
 	}
 }

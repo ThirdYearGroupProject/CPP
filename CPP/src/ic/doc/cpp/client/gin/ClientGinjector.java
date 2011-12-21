@@ -22,6 +22,7 @@ import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import ic.doc.cpp.client.company.core.CompanyPagePresenter;
 import ic.doc.cpp.client.company.core.postingevent.PostingEventPresenter;
+import ic.doc.cpp.client.admin.AdminPresenter;
 
 @GinModules({ DispatchAsyncModule.class, ClientModule.class })
 public interface ClientGinjector extends Ginjector {
@@ -53,4 +54,6 @@ public interface ClientGinjector extends Ginjector {
 	AsyncProvider<CompanyPagePresenter> getCompanyPagePresenter();
 
 	AsyncProvider<PostingEventPresenter> getPostingEventPresenter();
+
+	AsyncProvider<AdminPresenter> getAdminPresenter();
 }

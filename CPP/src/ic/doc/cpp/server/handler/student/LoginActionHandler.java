@@ -60,6 +60,11 @@ public class LoginActionHandler implements ActionHandler<Login, LoginResult> {
 			} catch (Exception e) {
 				throw new ActionException(e);
 			}
+		} else if (action.getType().equals("admin")){
+			//admin always successfully login, only for testing, change soon
+			HttpSession session = requestProvider.get().getSession();
+			session.setAttribute("login.authenticated", action.getLogin());
+			result = new LoginResult(session.getId());
 		} else {
 			throw new ActionException("Invalid type of user.");
 		}

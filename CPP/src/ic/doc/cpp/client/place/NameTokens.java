@@ -12,6 +12,7 @@ public class NameTokens {
 	public static final String eventfeed = "eventfeed";
 	public static final String companypage = "companypage";
 	public static final String postevent = "postevent";
+	public static final String admin = "admin";
 
 	public static String getStudentpage() {
 		return studentpage;
@@ -55,5 +56,9 @@ public class NameTokens {
 
 	public static String getPostevent() {
 		return postevent;
+	}
+
+	public static String getAdmin() {
+		return admin;
 	}
 }

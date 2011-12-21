@@ -61,6 +61,8 @@ import ic.doc.cpp.client.company.core.CompanyPagePresenter;
 import ic.doc.cpp.client.company.core.CompanyPageView;
 import ic.doc.cpp.client.company.core.postingevent.PostingEventPresenter;
 import ic.doc.cpp.client.company.core.postingevent.PostingEventView;
+import ic.doc.cpp.client.admin.AdminPresenter;
+import ic.doc.cpp.client.admin.AdminView;
 
 public class ClientModule extends AbstractPresenterModule {
 
@@ -179,5 +181,9 @@ public class ClientModule extends AbstractPresenterModule {
 		bindPresenter(PostingEventPresenter.class,
 				PostingEventPresenter.MyView.class, PostingEventView.class,
 				PostingEventPresenter.MyProxy.class);
+
+		bindPresenter(AdminPresenter.class, AdminPresenter.MyView.class,
+				AdminView.class, AdminPresenter.MyProxy.class);
+
 	}
 }

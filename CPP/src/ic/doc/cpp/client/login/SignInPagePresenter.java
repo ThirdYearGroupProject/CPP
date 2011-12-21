@@ -168,6 +168,10 @@ public class SignInPagePresenter extends
 							placeRequest = new PlaceRequest(
 									NameTokens.companypage);
 							placeManager.revealPlace(placeRequest);
+						} else if (type.equals("admin")) {
+							placeRequest = new PlaceRequest(
+									NameTokens.admin);
+							placeManager.revealPlace(placeRequest);
 						}
 
 						
@@ -227,6 +231,10 @@ public class SignInPagePresenter extends
 						} else if (type.equals("company")) {
 							placeRequest = new PlaceRequest(
 									NameTokens.companypage);
+							placeManager.revealPlace(placeRequest);
+						} else if (type.equals("admin")) {
+							placeRequest = new PlaceRequest(
+									NameTokens.admin);
 							placeManager.revealPlace(placeRequest);
 						}
 
