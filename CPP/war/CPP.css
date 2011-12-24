@@ -1,11 +1,47 @@
-* {
-  font-family: Tahoma, Verdana, sans-serif;
-  font-size: 11px;
+
+/*admin Page Start*/
+.submitButton {
+  padding-top: 10px;
+  padding-left: 10px;  
 }
 
-body, table td, select {
-  font-family: Tahoma, Verdana, sans-serif;
-  font-size: 11px;
+
+/*index Page Start*/
+
+.bRegTabSet {
+	top: 10px;
+}
+
+.regTabSet {
+	padding-top: 10px;
+	border-top: 1px solid #7598c7;
+}
+
+.middlePanel {
+  background-image: url(images/middlePanel_GradientMap.bmp);
+  background-repeat: repeat-x;  
+}
+
+.copyRight {
+  padding-left: 150px;
+  left:100px;
+}
+
+.bSignIn {
+		top: 10px;
+}
+
+.loginForm {
+  padding-top: 25px;
+}
+
+
+.CppHeader {
+  color:#ffffff; 
+  font:bold 30px/1.2em Arial, Helvetica, sans-serif;
+  font-size: 35px;
+  padding-top: 10px;
+  padding-left: 70px;  
 }
 
 /*Student Page Start*/

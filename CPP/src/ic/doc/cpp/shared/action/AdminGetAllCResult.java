@@ -1,7 +1,7 @@
 package ic.doc.cpp.shared.action;
 
-import ic.doc.cpp.server.domain.Company;
 import ic.doc.cpp.shared.CompanyRecord;
+import ic.doc.cpp.shared.dto.CompanyDto;
 
 import java.util.List;
 
@@ -10,14 +10,14 @@ import com.smartgwt.client.widgets.grid.ListGridRecord;
 
 public class AdminGetAllCResult implements Result {
 
-	private List<Company> ListOfCompany;
+	private List<CompanyDto> ListOfCompany;
 
 	@SuppressWarnings("unused")
 	private AdminGetAllCResult() {
 		// For serialization only
 	}
 
-	public AdminGetAllCResult(List<Company> ListOfCompany) {
+	public AdminGetAllCResult(List<CompanyDto> ListOfCompany) {
 		this.ListOfCompany = ListOfCompany;
 	}
 

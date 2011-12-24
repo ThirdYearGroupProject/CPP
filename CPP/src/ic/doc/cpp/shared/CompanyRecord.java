@@ -1,6 +1,6 @@
 package ic.doc.cpp.shared;
 
-import ic.doc.cpp.server.domain.Company;
+import ic.doc.cpp.shared.dto.CompanyDto;
 
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 
@@ -30,7 +30,7 @@ public class CompanyRecord extends ListGridRecord {
 		setAttribute("website", website);
 	}
 
-	public CompanyRecord(Company c) {
+	public CompanyRecord(CompanyDto c) {
 		setLogo(c.getLogo());
 		setWebsite(c.getWebsite());
 		setName(c.getName());

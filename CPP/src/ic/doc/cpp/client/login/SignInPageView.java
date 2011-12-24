@@ -1,10 +1,12 @@
 package ic.doc.cpp.client.login;
 
 
+import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
+import com.smartgwt.client.types.Positioning;
 import com.smartgwt.client.types.Side;
 import com.smartgwt.client.types.TitleOrientation;
 import com.smartgwt.client.widgets.Button;
@@ -57,49 +59,51 @@ public class SignInPageView extends ViewImpl implements
 		mainLayout.setWidth100();
 
 		HLayout topPanel = new HLayout();
-		topPanel.setBackgroundColor("#0B43C4");
+		topPanel.setBackgroundColor("#3B5998");
 		topPanel.setHeight("10%");
 
 		Label CppHeader = new Label(
-				"<span><font size='6' color='white'>Cooperative Partnership Programme</font></span>");
-		CppHeader.setWidth("150%");
+				"Cooperative Partnership Programme");
+		CppHeader.setWidth("50%");
+		CppHeader.setStyleName("CppHeader");
 
 		DynamicForm loginForm = new DynamicForm();
 		userNameField = new TextItem();
-		userNameField.setTitle("<font size='3' color='white'>Username</font>");
+		userNameField.setTitle("<font FACE='arial' size='3' color='white'>Username</font>");
 		userNameField.setRequired(true);
 
 		passwordField = new PasswordItem();
-		passwordField.setTitle("<font size='3' color='white'>Password</font>");
+		passwordField.setTitle("<font FACE='arial' size='3' color='white'>Password</font>");
 		passwordField.setRequired(true);
-
+		
 		userNameField.setValue("DuZhouzhou");
 		passwordField.setValue("N0More$ecret");
 		
 		userType = new SelectItem();
-		userType.setTitle("<font size='3' color='white'>User Type</font>");
+		userType.setTitle("<font FACE='arial' size='3' color='white'><b>User Type</b></font>");
 		userType.setValueMap("admin", "student", "company");
 		userType.setDefaultValue("student");
-
+		
 		signInButton = new Button("LogIn");
+		signInButton.setStyleName("bSignIn");
+		signInButton.setPosition(Positioning.RELATIVE);
 
-		loginForm.setWidth100();
 		loginForm.setFields(new FormItem[] { userNameField, passwordField,
 				userType });
 		loginForm.setTitleOrientation(TitleOrientation.TOP);
-		loginForm.setColWidths(new Object[] { "30%", "30%", "30%" });
+		loginForm.setColWidths(new Object[] { "20%", "20%", "20%" });
 		loginForm.setNumCols(3);
-
+		loginForm.setStyleName("loginForm");
+		
 		topPanel.addMember(CppHeader);
 		topPanel.addMember(loginForm);
 		topPanel.addMember(signInButton);
 
-		HLayout southPanel = new HLayout();
-		southPanel.setBackgroundColor("grey");
-		HTMLPane CPPdescription = new HTMLPane();
+		HLayout middlePanel = new HLayout();
+		HTMLPane cppWelcomeLabel = new HTMLPane();
 		VLayout regPanel = new VLayout();
 
-		CPPdescription.setPadding(50);
+		cppWelcomeLabel.setPadding(20);
 		String cpp = "<img src='http://www.q2.ltd.uk/files/Section%20Images/recruit_si.gif' alt='Recruit Logo' width='150' height='150' />"
 				+ "<p>Our Corporate Partnership Programme is designed to promote the relationship "
 				+ "between the Department of Computing and organisations who wish to recruit our students "
@@ -107,16 +111,15 @@ public class SignInPageView extends ViewImpl implements
 				+ "Partners access the database to recruit students for graduate positions, summer internships "
 				+ "and industrial placements. Corporate Partners also receive a package of other benefits aimed "
 				+ "at raising their profile amongst our students. Companies who are interested in applying for "
-				+ "membership should email cpp@doc.ic.ac.uk, or post us a completed application form.</p>"
-				+ "<p>We have launched an Applications of Computing in Industry lecture series. This timetabled "
-				+ "series of talks is given by our Corporate Partners and is designed to inform our students about"
-				+ " how Computer Science is applied to meet business challenges.</p>";
+				+ "membership should email cpp@doc.ic.ac.uk, or post us a completed application form.</p>";
 
-		CPPdescription.setContents("<font size='5' color='white'>" + cpp
+		cppWelcomeLabel.setContents("<font FACE='arial' size='4' color='#3B5998'>" + cpp
 				+ "</font>");
-
+		
 		Label regWelcome = new Label(
-				"<font size='4' color='black'>Welcome to register</font>");
+				"<font FACE='arial' size='4' color='#3B5998' >Welcome to register</font>");
+		regWelcome.setHeight(50);
+	
 		DynamicForm studentRegForm = new DynamicForm();
 
 		regUserName = new TextItem();
@@ -140,7 +143,7 @@ public class SignInPageView extends ViewImpl implements
 		emailField.setRequired(true);
 		
 		gender = new SelectItem();
-		gender.setTitle("<font size='2' color='black'>gender</font>");
+		gender.setTitle("<font size='2' color='black'><b>gender</b></font>");
 		gender.setValueMap("Male", "Female");
 		gender.setDefaultValue("Male");
 	
@@ -170,7 +173,7 @@ public class SignInPageView extends ViewImpl implements
 		emailField2.setRequired(true);
 		
 		gender2 = new SelectItem();
-		gender2.setTitle("<font size='2' color='black'>gender</font>");
+		gender2.setTitle("<font size='2' color='black'><b>gender</b></font>");
 		gender2.setValueMap("Male", "Female");
 		gender2.setDefaultValue("Male");
 		
@@ -184,7 +187,8 @@ public class SignInPageView extends ViewImpl implements
 		regTabSet = new TabSet();
 		regTabSet.setTabBarPosition(Side.TOP);
 		regTabSet.setWidth("50%");
-
+		regTabSet.setStyleName("regTabSet");
+		
 		Tab tTabStudent = new Tab();
 		tTabStudent.setPane(studentRegForm);
 		tTabStudent.setTitle("student");
@@ -195,17 +199,31 @@ public class SignInPageView extends ViewImpl implements
 
 		regTabSet.addTab(tTabStudent);
 		regTabSet.addTab(tTabCompany);
+		regTabSet.setHeight(240);
 		
 		regButton = new Button("Registrate");
+		regButton.setPosition(Positioning.RELATIVE);
+		regButton.setStyleName("bRegTabSet");
 		
 		regPanel.addMember(regWelcome);
 		regPanel.addMember(regTabSet);
 		regPanel.addMember(regButton);
 
-		southPanel.addMember(CPPdescription);
-		southPanel.addMember(regPanel);
+		middlePanel.addMember(cppWelcomeLabel);
+		middlePanel.addMember(regPanel);
+		middlePanel.setStyleName("middlePanel");
+		
+		HLayout southPanel = new HLayout();
+		Label copyRightLabel = new Label("This website and its content is copyright of Imperial College London - © Imperial College London 2011. All rights reserved.");
+		copyRightLabel.setStyleName("copyRight");
+		copyRightLabel.setWidth100();
+		copyRightLabel.setPosition(Positioning.RELATIVE);
+
+		southPanel.addMember(copyRightLabel);
+		southPanel.setHeight("15%");
 		
 		mainLayout.addMember(topPanel);
+		mainLayout.addMember(middlePanel);
 		mainLayout.addMember(southPanel);
 		mainLayout.draw();
 	}

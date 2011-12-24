@@ -1,6 +1,5 @@
 package ic.doc.cpp.client.admin;
 
-
 import ic.doc.cpp.client.LoggedInGatekeeper;
 import ic.doc.cpp.client.place.NameTokens;
 import ic.doc.cpp.shared.action.AdminGetAllC;
@@ -31,17 +30,23 @@ public class AdminPresenter extends
 	private final EventBus eventBus;
 	private final DispatchAsync dispatcher;
 	private final PlaceManager placeManager;
-	
-	public interface MyView extends View {		
+
+	public interface MyView extends View {
 
 		void fillCompanyGrid(ListGridRecord[] records);
+
 		void addbSubmitHandler(ClickHandler handle);
+
 		String getName();
-		String getWebsite();		
+
+		String getWebsite();
+
 		String getLogo();
+
 		String getDescription();
+
 		String getCategory();
-		
+
 	}
 
 	@ProxyCodeSplit
@@ -69,55 +74,51 @@ public class AdminPresenter extends
 	protected void onBind() {
 		super.onBind();
 
-		getView().addbSubmitHandler(new ClickHandler(){
+		getView().addbSubmitHandler(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
 				sendRegToServer();
-				
-			}});
-		
-		
+
+			}
+		});
+
 		dispatcher.execute(new AdminGetAllC(null),
 				new AsyncCallback<AdminGetAllCResult>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						SC.say("Fail to get list of company:"+caught.getLocalizedMessage());
+						SC.say("Fail to get list of company:"
+								+ caught.getLocalizedMessage());
 					}
 
 					@Override
 					public void onSuccess(AdminGetAllCResult result) {
 						getView().fillCompanyGrid(result.getListOfCompany());
-						
+
 					}
-			
-		}
-		);
 
-		
-		
-		
+				});
+
 	}
-
+	
 	protected void sendRegToServer() {
-		dispatcher.execute(new RegCompany(null, null, null, null, null),
+		dispatcher.execute(new RegCompany( getView().getWebsite() ,getView().getLogo(),
+				getView().getName() ,getView().getCategory() ,getView().getDescription() ),
 				new AsyncCallback<RegCompanyResult>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						// TODO Auto-generated method stub
-						
+						SC.say(caught.getLocalizedMessage());
+
 					}
 
 					@Override
 					public void onSuccess(RegCompanyResult result) {
-						// TODO Auto-generated method stub
-						
+						SC.say("the invitation code for newly registered company is: "+result.getResult());
+
 					}
 
-		
-		}
-		);
+				});
 	}
 }

@@ -26,7 +26,6 @@ public class AdminView extends ViewImpl implements AdminPresenter.MyView {
 	private TextItem nameField;
 	private TextItem descriptionField;
 	private TextItem websiteField;
-	private TextItem logoField;
 	private TextItem categoryField;
 	private TextItem Company;
 	private Button submitReg;
@@ -39,7 +38,7 @@ public class AdminView extends ViewImpl implements AdminPresenter.MyView {
 		mainLayout.setWidth100();
 
 		HLayout topPanel = new HLayout();
-		topPanel.setBackgroundColor("#0B43C4");
+		topPanel.setBackgroundColor("#3B5998");
 		topPanel.setHeight("10%");
 
 		Label CppHeader = new Label(
@@ -94,10 +93,6 @@ public class AdminView extends ViewImpl implements AdminPresenter.MyView {
 		websiteField.setTitle("<font size='2' color='black'>website</font>");
 		websiteField.setRequired(true);
 		
-		logoField = new TextItem();
-		logoField.setTitle("<font size='2' color='black'>Company Name</font>");
-		logoField.setRequired(true);
-
 		categoryField = new TextItem();
 		categoryField.setTitle("<font size='2' color='black'>category</font>");
 		categoryField.setRequired(true);
@@ -108,10 +103,11 @@ public class AdminView extends ViewImpl implements AdminPresenter.MyView {
 		
 		DynamicForm companyRegForm = new DynamicForm();
 		companyRegForm.setFields(new FormItem[] { nameField,
-				categoryField,logoField,websiteField,descriptionField,Company });
+				categoryField,websiteField,descriptionField,Company });
 		
 		submitReg = new Button();
 		submitReg.setTitle("Submit");
+		submitReg.setStyleName("submitButton");
 		
 		regCompany.addMember(companyRegForm);
 		regCompany.addMember(submitReg);
