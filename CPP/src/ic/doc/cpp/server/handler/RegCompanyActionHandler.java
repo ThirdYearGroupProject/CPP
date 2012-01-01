@@ -1,15 +1,5 @@
 package ic.doc.cpp.server.handler;
 
-import java.security.InvalidKeyException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-
-import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
-
 import ic.doc.cpp.server.dao.CompanyCategoryDao;
 import ic.doc.cpp.server.dao.CompanyDao;
 import ic.doc.cpp.server.domain.Company;
@@ -19,8 +9,13 @@ import ic.doc.cpp.server.util.InvitationKeyManager;
 import ic.doc.cpp.shared.action.RegCompany;
 import ic.doc.cpp.shared.action.RegCompanyResult;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 import com.google.inject.Inject;
 import com.gwtplatform.dispatch.server.ExecutionContext;
+import com.gwtplatform.dispatch.server.actionhandler.ActionHandler;
 import com.gwtplatform.dispatch.shared.ActionException;
 
 public class RegCompanyActionHandler implements

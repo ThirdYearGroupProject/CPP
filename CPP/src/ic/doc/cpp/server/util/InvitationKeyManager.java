@@ -2,21 +2,33 @@ package ic.doc.cpp.server.util;
 
 import java.security.InvalidKeyException;
 import java.security.Key;
+import java.security.spec.KeySpec;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.interfaces.PBEKey;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.SecretKeySpec;
 
 public class InvitationKeyManager {
 
-	private static Key key = null;
+	private static String key = "NoMoreSecret";
+	private static SecretKey encKey;
 	private static Cipher cipher = null;
 
 	static {
 		String algorithm = "AES";
 		try {
-			key = KeyGenerator.getInstance(algorithm).generateKey();
+			byte[] salt = new byte[16];  
+			PBEKeySpec password = new PBEKeySpec(key.toCharArray(), salt, 1000, 128);  
+			SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");  
+			PBEKey key = (PBEKey) factory.generateSecret(password);  
+			encKey = new SecretKeySpec(key.getEncoded(), algorithm); 
+			
 			cipher = Cipher.getInstance(algorithm);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -30,7 +42,7 @@ public class InvitationKeyManager {
 			BadPaddingException, InvalidKeyException {
 
 		String input = companyCode;
-		cipher.init(Cipher.ENCRYPT_MODE, key);
+		cipher.init(Cipher.ENCRYPT_MODE, encKey);
 		byte[] inputBytes = input.getBytes();
 		byte[] cipherText = cipher.doFinal(inputBytes);
 		
@@ -56,12 +68,8 @@ public class InvitationKeyManager {
 		
 		for(int i = 0; i<tokens.length;i++){
 			int value = Integer.parseInt(tokens[i]);
-			//wrap needed as int is 32bit and byte is 8 bit
-			if( value <= 127 && value >= 0){
-				result[i] = (byte)value;
-			}else{
-				throw new NumberFormatException("byte String contain out of range field");
-			}
+			
+			result[i] = (byte)value;
 
 		}
 		
@@ -76,8 +84,9 @@ public class InvitationKeyManager {
 		byte[] recoveredBytes;
 		String recovered="";
 		try {
-			cipher.init(Cipher.DECRYPT_MODE, key);
-			recoveredBytes = cipher.doFinal(stringToByte(invitationCode));
+			cipher.init(Cipher.DECRYPT_MODE, encKey);
+			byte[] cipherText = stringToByte(invitationCode);
+			recoveredBytes = cipher.doFinal(cipherText);
 			recovered = new String(recoveredBytes);
 		}  
 		catch (NumberFormatException e) {

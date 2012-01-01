@@ -1,7 +1,6 @@
 package ic.doc.cpp.client.login;
 
 
-import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;

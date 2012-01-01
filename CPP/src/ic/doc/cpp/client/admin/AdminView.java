@@ -1,23 +1,31 @@
 package ic.doc.cpp.client.admin;
 
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 import com.smartgwt.client.types.Side;
 import com.smartgwt.client.types.SortDirection;
+import com.smartgwt.client.types.TreeModelType;
 import com.smartgwt.client.widgets.Button;
 import com.smartgwt.client.widgets.HTMLPane;
 import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.events.DrawEvent;
+import com.smartgwt.client.widgets.events.DrawHandler;
 import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.form.fields.FormItem;
 import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
+import com.smartgwt.client.widgets.grid.events.CellClickHandler;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
 import com.smartgwt.client.widgets.tab.Tab;
 import com.smartgwt.client.widgets.tab.TabSet;
+import com.smartgwt.client.widgets.tree.Tree;
+import com.smartgwt.client.widgets.tree.TreeGrid;
+import com.smartgwt.client.widgets.tree.TreeGridField;
 
 public class AdminView extends ViewImpl implements AdminPresenter.MyView {
 
@@ -27,7 +35,7 @@ public class AdminView extends ViewImpl implements AdminPresenter.MyView {
 	private TextItem descriptionField;
 	private TextItem websiteField;
 	private TextItem categoryField;
-	private TextItem Company;
+
 	private Button submitReg;
 
 	@Inject
@@ -97,13 +105,10 @@ public class AdminView extends ViewImpl implements AdminPresenter.MyView {
 		categoryField.setTitle("<font size='2' color='black'>category</font>");
 		categoryField.setRequired(true);
 		
-		Company = new TextItem();
-		Company.setTitle("<font size='2' color='black'>Company Name</font>");
-		Company.setRequired(true);
 		
 		DynamicForm companyRegForm = new DynamicForm();
 		companyRegForm.setFields(new FormItem[] { nameField,
-				categoryField,websiteField,descriptionField,Company });
+				categoryField,websiteField,descriptionField });
 		
 		submitReg = new Button();
 		submitReg.setTitle("Submit");
@@ -118,12 +123,51 @@ public class AdminView extends ViewImpl implements AdminPresenter.MyView {
 		
 		regTabSet.addTab(tRegCompany);
 		regTabSet.addTab(tViewAllCompany);
+		// TODO: company category better to be a pop-up frame
+		//regTabSet.addTab(initialiseCategoryTab());
 		
 		southPanel.addMember(regTabSet);
 		
 		mainLayout.addMember(topPanel);
 		mainLayout.addMember(southPanel);
 		mainLayout.draw();
+	}
+
+	private Tab initialiseCategoryTab() {
+		Tab tRegCategory = new Tab();
+		tRegCategory.setTitle("Company Category");
+	
+		
+        TreeGrid treeGrid = new TreeGrid();  
+        treeGrid.setWidth(300);  
+        treeGrid.setHeight(400);  
+  
+        TreeGridField field = new TreeGridField("Name", "Tree from local data");  
+        field.setCanSort(false);  
+  
+        treeGrid.setFields(field);  
+  
+        final Tree tree = new Tree();  
+        tree.setModelType(TreeModelType.PARENT);  
+        tree.setNameProperty("Name");  
+        tree.setIdField("EmployeeId");  
+        tree.setParentIdField("ReportsTo");  
+        tree.setShowRoot(true);  
+        
+        //CategoryTreeNode root = new EmployeeTreeNode("4", "1", "Charles Madigen");  
+
+        //tree.setData(new TreeNode[]{root, node2, node3, node4, node5});  
+  
+        treeGrid.addDrawHandler(new DrawHandler() {  
+            public void onDraw(DrawEvent event) {  
+                tree.openAll();  
+            }  
+        });  
+        
+        treeGrid.setData(tree);  
+        
+        treeGrid.draw();
+		return tRegCategory;  
 	}
 
 	@Override
@@ -137,40 +181,35 @@ public class AdminView extends ViewImpl implements AdminPresenter.MyView {
 	}
 
 	@Override
-	public void addbSubmitHandler(
+	public HandlerRegistration addbSubmitHandler(
 			com.smartgwt.client.widgets.events.ClickHandler handle) {
-		submitReg.addClickHandler(handle);
+		return submitReg.addClickHandler(handle);
 		
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return nameField.getValueAsString();
 	}
 
 	@Override
 	public String getWebsite() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getLogo() {
-		// TODO Auto-generated method stub
-		return null;
+		return websiteField.getValueAsString();
 	}
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
+		return  descriptionField.getValueAsString();
 	}
 
 	@Override
 	public String getCategory() {
-		// TODO Auto-generated method stub
-		return null;
+		return categoryField.getValueAsString();
+	}
+
+	@Override
+	public HandlerRegistration addGridListHandler(CellClickHandler handle) {
+		return companyGrid.addCellClickHandler(handle);
 	}
 	
 }

@@ -34,6 +34,15 @@ public class CompanyRecord extends ListGridRecord {
 		setLogo(c.getLogo());
 		setWebsite(c.getWebsite());
 		setName(c.getName());
+		setId(c.getCompanyId());
 	}
 
+	private void setId(Long companyId) {
+		setAttribute("id", companyId);
+	}
+
+	public Long getId() {
+		return getAttributeAsLong("id");
+	}
+	
 }

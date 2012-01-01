@@ -31,7 +31,7 @@ public class CompanyCategoryTest {
 	public void testCompanyCategoryDao() {
 		try {
 			Log.debug("testCompanyCategoryDao()");
-			
+		
 			createCompanyCategory();
 			updateCompanyCategory();
 			deleteCompanyCategory();
@@ -59,7 +59,7 @@ public class CompanyCategoryTest {
 		Log.debug("updateCompanyCategory()");
 	    
 		CompanyCategoryDao companyCategoryDao = new CompanyCategoryDao();
-	    
+
 		CompanyCategory category1 = companyCategoryDao.retrieveCompanyCategory(1L);
 	    Log.debug("accountDao.retrieveAccount(1L) - " + category1.toString());
 	    category1.setCategoryName("All/Banking");

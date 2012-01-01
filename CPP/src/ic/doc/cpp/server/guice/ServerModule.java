@@ -41,6 +41,7 @@ import ic.doc.cpp.shared.action.student.UpdatePassword;
 import ic.doc.cpp.shared.action.student.UpdateStudentInterestedAreas;
 import ic.doc.cpp.shared.action.student.UpdateStudentUserInformation;
 import ic.doc.cpp.shared.action.AdminGetAllC;
+import ic.doc.cpp.shared.action.GetInvitation;
 import ic.doc.cpp.shared.action.PostEvent;
 import ic.doc.cpp.shared.action.RegCompany;
 import ic.doc.cpp.shared.action.Registration;
@@ -51,6 +52,7 @@ import ic.doc.cpp.server.handler.PostEventActionHandler;
 import ic.doc.cpp.server.handler.student.GetStudentLoginActionHandler;
 import ic.doc.cpp.server.handler.AdminGetAllCActionHandler;
 import ic.doc.cpp.server.handler.RegCompanyActionHandler;
+import ic.doc.cpp.server.handler.GetInvitationActionHandler;
 
 public class ServerModule extends HandlerModule {
 
@@ -140,6 +142,9 @@ public class ServerModule extends HandlerModule {
 				LoggedInActionValidator.class);
 
 		bindHandler(RegCompany.class, RegCompanyActionHandler.class,
+				LoggedInActionValidator.class);
+
+		bindHandler(GetInvitation.class, GetInvitationActionHandler.class,
 				LoggedInActionValidator.class);
 	}
 }

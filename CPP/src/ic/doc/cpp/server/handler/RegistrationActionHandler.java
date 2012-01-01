@@ -3,6 +3,7 @@ package ic.doc.cpp.server.handler;
 import ic.doc.cpp.server.dao.CompanyDao;
 import ic.doc.cpp.server.dao.CompanyUserDao;
 import ic.doc.cpp.server.dao.StudentUserDao;
+import ic.doc.cpp.server.domain.Company;
 import ic.doc.cpp.server.domain.CompanyUser;
 import ic.doc.cpp.server.domain.StudentUser;
 import ic.doc.cpp.server.util.InvitationKeyManager;
@@ -67,10 +68,12 @@ public class RegistrationActionHandler implements
 			}
 			
 			CompanyDao companyDao = new CompanyDao();
+			Company company;
 			try {
 				String companyCode = InvitationKeyManager.decodeInvitaion(action.getCompany());
 				Long companyId = Long.parseLong(companyCode);
-				if (companyDao.retrieveCompany(companyId ) == null) {
+				company = companyDao.retrieveCompany(companyId );
+				if (company == null) {
 					throw new ActionException("Company noty exist");
 				}
 			} catch (NoResultException e) {
@@ -79,10 +82,11 @@ public class RegistrationActionHandler implements
 				throw new ActionException("invitation code error not valid");
 			}
 			
+			
 			companyUserDao.createUser(new CompanyUser(action.getUserName(),
 					salt, action.getPassword(), action.getFirstName(), action
 							.getLastName(), action.getEmail(), action
-							.getGender(), null, null ));
+							.getGender(), company , null ));
 			successReg = true;
 		} else {
 			throw new ActionException("user type invalid");

@@ -13,6 +13,17 @@ import org.junit.Test;
 public class InvitationKeyManagerTest {
 
 	@Test
+	public void StringToByteTest2() {
+
+
+		String plainText = "adxv";
+
+		byte[] ByteCode = InvitationKeyManager.stringToByte(plainText);
+		String plainText2 = InvitationKeyManager.byteToString(ByteCode);
+		
+	}
+	
+	@Test
 	public void normalTest() throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
 
 		String companyCode = "5";
